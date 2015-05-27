@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormMain));
             this.buttonClose = new System.Windows.Forms.Button();
             this.buttonReset = new System.Windows.Forms.Button();
             this.buttonSimulate = new System.Windows.Forms.Button();
@@ -35,9 +36,10 @@
             // 
             // buttonClose
             // 
-            this.buttonClose.Location = new System.Drawing.Point(12, 70);
+            this.buttonClose.Location = new System.Drawing.Point(539, 149);
+            this.buttonClose.Margin = new System.Windows.Forms.Padding(7, 6, 7, 6);
             this.buttonClose.Name = "buttonClose";
-            this.buttonClose.Size = new System.Drawing.Size(75, 23);
+            this.buttonClose.Size = new System.Drawing.Size(229, 55);
             this.buttonClose.TabIndex = 0;
             this.buttonClose.Text = "Выход";
             this.buttonClose.UseVisualStyleBackColor = true;
@@ -45,30 +47,41 @@
             // 
             // buttonReset
             // 
-            this.buttonReset.Location = new System.Drawing.Point(12, 12);
+            this.buttonReset.Location = new System.Drawing.Point(539, 15);
+            this.buttonReset.Margin = new System.Windows.Forms.Padding(7, 6, 7, 6);
             this.buttonReset.Name = "buttonReset";
-            this.buttonReset.Size = new System.Drawing.Size(75, 23);
+            this.buttonReset.Size = new System.Drawing.Size(229, 55);
             this.buttonReset.TabIndex = 1;
             this.buttonReset.Text = "Сброс";
             this.buttonReset.UseVisualStyleBackColor = true;
             // 
             // buttonSimulate
             // 
-            this.buttonSimulate.Location = new System.Drawing.Point(12, 41);
+            this.buttonSimulate.Location = new System.Drawing.Point(539, 82);
+            this.buttonSimulate.Margin = new System.Windows.Forms.Padding(7, 6, 7, 6);
             this.buttonSimulate.Name = "buttonSimulate";
-            this.buttonSimulate.Size = new System.Drawing.Size(75, 23);
+            this.buttonSimulate.Size = new System.Drawing.Size(229, 55);
             this.buttonSimulate.TabIndex = 2;
             this.buttonSimulate.Text = "Запуск";
             this.buttonSimulate.UseVisualStyleBackColor = true;
             // 
             // FormMain
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 25F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(784, 562);
+            this.BackColor = System.Drawing.Color.Green;
+            this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.ClientSize = new System.Drawing.Size(784, 561);
             this.Controls.Add(this.buttonSimulate);
             this.Controls.Add(this.buttonReset);
             this.Controls.Add(this.buttonClose);
+            this.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.Margin = new System.Windows.Forms.Padding(7, 6, 7, 6);
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "FormMain";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Футбольный симулятор";
