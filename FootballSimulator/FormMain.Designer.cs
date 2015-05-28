@@ -36,7 +36,7 @@
             // 
             // buttonClose
             // 
-            this.buttonClose.Location = new System.Drawing.Point(539, 149);
+            this.buttonClose.Location = new System.Drawing.Point(16, 149);
             this.buttonClose.Margin = new System.Windows.Forms.Padding(7, 6, 7, 6);
             this.buttonClose.Name = "buttonClose";
             this.buttonClose.Size = new System.Drawing.Size(229, 55);
@@ -47,7 +47,7 @@
             // 
             // buttonReset
             // 
-            this.buttonReset.Location = new System.Drawing.Point(539, 15);
+            this.buttonReset.Location = new System.Drawing.Point(16, 15);
             this.buttonReset.Margin = new System.Windows.Forms.Padding(7, 6, 7, 6);
             this.buttonReset.Name = "buttonReset";
             this.buttonReset.Size = new System.Drawing.Size(229, 55);
@@ -57,7 +57,7 @@
             // 
             // buttonSimulate
             // 
-            this.buttonSimulate.Location = new System.Drawing.Point(539, 82);
+            this.buttonSimulate.Location = new System.Drawing.Point(16, 82);
             this.buttonSimulate.Margin = new System.Windows.Forms.Padding(7, 6, 7, 6);
             this.buttonSimulate.Name = "buttonSimulate";
             this.buttonSimulate.Size = new System.Drawing.Size(229, 55);
@@ -69,9 +69,10 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 25F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.Color.Green;
-            this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.ClientSize = new System.Drawing.Size(784, 561);
+            this.BackColor = System.Drawing.Color.YellowGreen;
+            this.BackgroundImage = global::FootballSimulator.Properties.Resources.Background;
+            this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.ClientSize = new System.Drawing.Size(1183, 788);
             this.Controls.Add(this.buttonSimulate);
             this.Controls.Add(this.buttonReset);
             this.Controls.Add(this.buttonClose);
