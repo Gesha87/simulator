@@ -15,8 +15,6 @@ namespace FootballSimulator
 {
     public partial class FormMain : Form
     {
-        System.Data.SqlClient.SqlConnection connection;
-
         public FormMain()
         {
             InitializeComponent();
@@ -34,27 +32,21 @@ namespace FootballSimulator
 
         private void buttonSimulate_Click(object sender, EventArgs e)
         {
-            dataGridViewSpain.Columns.Clear();
+            List<Team> teams = DB.getInstance().getTeams(1);
+            int count = teams.Count;
+
             dataGridViewSpain.Rows.Clear();
-            SqlCommand command = connection.CreateCommand();
-            command.CommandText = "SELECT * from Team WHERE country_id = 1";
-            SqlDataReader reader = command.ExecuteReader();
+            dataGridViewSpain.Columns.Clear();
             dataGridViewSpain.Columns.Add("Position", "М");
             dataGridViewSpain.Columns.Add("Team", "Команда");
-            List<Team> teams = new List<Team>();
-            while (reader.Read())
+            foreach (Team team in teams)
             {
-                Team team = new Team();
-                team.id = reader.GetInt32(reader.GetOrdinal("id"));
-                team.name = reader.GetString(reader.GetOrdinal("name"));
-                team.rating = reader.GetDouble(reader.GetOrdinal("rating"));
-                teams.Add(team);
-                dataGridViewSpain.Columns.Add("Team" + reader["id"].ToString(), reader["id"].ToString());
+                dataGridViewSpain.Columns.Add("Team" + team.id, team.id.ToString());
+                dataGridViewSpain.Columns["Team" + team.id].HeaderCell.Style.Font = new Font("Microsoft Sans Serif", (float)8.25);
             }
-            reader.Close();
             dataGridViewSpain.Columns.Add("Points", "Очки");
-            int count = teams.Count;
             dataGridViewSpain.Rows.Add(count);
+            
             for (int i = 0; i < count; i++)
             {
                 Team home = teams.ElementAt(i);
@@ -81,10 +73,12 @@ namespace FootballSimulator
                     }
                 }
             }
+
             teams.Sort(delegate(Team x, Team y)
             {
                 return -x.points.CompareTo(y.points);
             });
+
             for (int i = 0; i < count; i++)
             {
                 Team home = teams.ElementAt(i);
@@ -127,18 +121,12 @@ namespace FootballSimulator
 
         private void FormMain_Load(object sender, EventArgs e)
         {
-            string path = Directory.GetCurrentDirectory();
-            SqlConnectionStringBuilder builder = new SqlConnectionStringBuilder();
-            builder.DataSource = @"(LocalDB)\v11.0";
-            builder.AttachDBFilename = path + @"\data.mdf";
-            builder.IntegratedSecurity = false;
-            connection = new System.Data.SqlClient.SqlConnection(builder.ConnectionString);
-            connection.Open();
+            
         }
 
         private void FormMain_FormClosing(object sender, FormClosingEventArgs e)
         {
-            connection.Close();
+            
         }
     }
 }

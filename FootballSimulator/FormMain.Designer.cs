@@ -43,10 +43,10 @@
             // buttonClose
             // 
             this.buttonClose.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.buttonClose.Location = new System.Drawing.Point(16, 149);
-            this.buttonClose.Margin = new System.Windows.Forms.Padding(7, 6, 7, 6);
+            this.buttonClose.Location = new System.Drawing.Point(16, 148);
+            this.buttonClose.Margin = new System.Windows.Forms.Padding(8, 6, 8, 6);
             this.buttonClose.Name = "buttonClose";
-            this.buttonClose.Size = new System.Drawing.Size(229, 55);
+            this.buttonClose.Size = new System.Drawing.Size(228, 56);
             this.buttonClose.TabIndex = 0;
             this.buttonClose.Text = "Выход";
             this.buttonClose.UseVisualStyleBackColor = true;
@@ -57,9 +57,9 @@
             this.buttonReset.BackColor = System.Drawing.Color.Transparent;
             this.buttonReset.Cursor = System.Windows.Forms.Cursors.Hand;
             this.buttonReset.Location = new System.Drawing.Point(16, 15);
-            this.buttonReset.Margin = new System.Windows.Forms.Padding(7, 6, 7, 6);
+            this.buttonReset.Margin = new System.Windows.Forms.Padding(8, 6, 8, 6);
             this.buttonReset.Name = "buttonReset";
-            this.buttonReset.Size = new System.Drawing.Size(229, 55);
+            this.buttonReset.Size = new System.Drawing.Size(228, 56);
             this.buttonReset.TabIndex = 1;
             this.buttonReset.Text = "Сброс";
             this.buttonReset.UseVisualStyleBackColor = false;
@@ -68,10 +68,10 @@
             // buttonSimulate
             // 
             this.buttonSimulate.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.buttonSimulate.Location = new System.Drawing.Point(16, 82);
-            this.buttonSimulate.Margin = new System.Windows.Forms.Padding(7, 6, 7, 6);
+            this.buttonSimulate.Location = new System.Drawing.Point(16, 83);
+            this.buttonSimulate.Margin = new System.Windows.Forms.Padding(8, 6, 8, 6);
             this.buttonSimulate.Name = "buttonSimulate";
-            this.buttonSimulate.Size = new System.Drawing.Size(229, 55);
+            this.buttonSimulate.Size = new System.Drawing.Size(228, 56);
             this.buttonSimulate.TabIndex = 2;
             this.buttonSimulate.Text = "Запуск";
             this.buttonSimulate.UseVisualStyleBackColor = true;
@@ -88,34 +88,35 @@
             this.dataGridViewSpain.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
             this.dataGridViewSpain.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
             this.dataGridViewSpain.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.dataGridViewSpain.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
             dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
             dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
             dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridViewSpain.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
-            this.dataGridViewSpain.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dataGridViewSpain.DefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dataGridViewSpain.DefaultCellStyle = dataGridViewCellStyle2;
+            this.dataGridViewSpain.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
             this.dataGridViewSpain.Location = new System.Drawing.Point(256, 15);
+            this.dataGridViewSpain.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.dataGridViewSpain.MultiSelect = false;
             this.dataGridViewSpain.Name = "dataGridViewSpain";
             this.dataGridViewSpain.ReadOnly = true;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.HotTrack;
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.Color.HotPink;
+            this.dataGridViewSpain.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
             this.dataGridViewSpain.RowHeadersVisible = false;
             dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
             this.dataGridViewSpain.RowsDefaultCellStyle = dataGridViewCellStyle4;
             this.dataGridViewSpain.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dataGridViewSpain.ShowCellToolTips = false;
-            this.dataGridViewSpain.Size = new System.Drawing.Size(915, 761);
+            this.dataGridViewSpain.Size = new System.Drawing.Size(916, 762);
             this.dataGridViewSpain.TabIndex = 3;
             this.dataGridViewSpain.Visible = false;
             // 
@@ -136,7 +137,7 @@
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Margin = new System.Windows.Forms.Padding(7, 6, 7, 6);
+            this.Margin = new System.Windows.Forms.Padding(8, 6, 8, 6);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "FormMain";
