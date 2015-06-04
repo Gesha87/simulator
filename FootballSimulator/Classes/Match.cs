@@ -7,25 +7,33 @@ using System.Threading.Tasks;
 
 namespace FootballSimulator.Classes
 {
-    static class Match
+    class Match
     {
-        public static string getScore(double homeRating, double guestRating, bool countHome = true)
+        public Team home;
+        public Team guest;
+        public int homeScore = 0;
+        public int guestScore = 0;
+
+        public Match(Team homeTeam, Team guestTeam, bool countHome = true)
         {
+            home = homeTeam;
+            guest = guestTeam;
             RandomNumberGenerator generator = RandomNumberGenerator.Create();
             byte[] bytes = new byte[4];
             generator.GetBytes(bytes);
             double val = (double)BitConverter.ToUInt32(bytes, 0) / UInt32.MaxValue;
             if (val < 0.45)
             {
-                return "1:0";
+                homeScore = 1;
             }
             else if (val < 0.7)
             {
-                return "1:1";
+                homeScore = 1;
+                guestScore = 1;
             }
             else
             {
-                return "0:1";
+                guestScore = 1;
             }
         }
     }

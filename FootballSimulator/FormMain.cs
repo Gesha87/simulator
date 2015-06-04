@@ -39,6 +39,7 @@ namespace FootballSimulator
             SqlCommand command = connection.CreateCommand();
             command.CommandText = "SELECT * from Team WHERE country_id = 1";
             SqlDataReader reader = command.ExecuteReader();
+            dataGridViewSpain.Columns.Add("Position", "М");
             dataGridViewSpain.Columns.Add("Team", "Команда");
             List<Team> teams = new List<Team>();
             while (reader.Read())
@@ -48,7 +49,7 @@ namespace FootballSimulator
                 team.name = reader.GetString(reader.GetOrdinal("name"));
                 team.rating = reader.GetDouble(reader.GetOrdinal("rating"));
                 teams.Add(team);
-                //dataGridViewSpain.Columns.Add(reader["id"].ToString(), reader["id"].ToString());
+                dataGridViewSpain.Columns.Add("Team" + reader["id"].ToString(), reader["id"].ToString());
             }
             reader.Close();
             dataGridViewSpain.Columns.Add("Points", "Очки");
@@ -61,11 +62,10 @@ namespace FootballSimulator
                 {
                     if (i == j) continue;
                     Team guest = teams.ElementAt(j);
-                    string score = Match.getScore(home.rating, guest.rating);
-                    char[] delimiterChars = { ':' };
-                    string[] words = score.Split(delimiterChars);
-                    int homeScore = int.Parse((string)words.GetValue(0));
-                    int guestScore = int.Parse((string)words.GetValue(1));
+                    Match match = new Match(home, guest);
+                    home.matches.Add(guest.id, match);
+                    int homeScore = match.homeScore;
+                    int guestScore = match.guestScore;
                     if (homeScore > guestScore)
                     {
                         home.points += 3;
@@ -87,9 +87,40 @@ namespace FootballSimulator
             });
             for (int i = 0; i < count; i++)
             {
-                Team team = teams.ElementAt(i);
-                dataGridViewSpain.Rows[i].Cells["Team"].Value = team.name;
-                dataGridViewSpain.Rows[i].Cells["Points"].Value = team.points;
+                Team home = teams.ElementAt(i);
+                dataGridViewSpain.Rows[i].Cells["Position"].Value = i + 1;
+                dataGridViewSpain.Rows[i].Cells["Team"].Value = home.name;
+                dataGridViewSpain.Rows[i].Cells["Points"].Value = home.points;
+                for (int j = 0; j < count; j++)
+                {
+                    if (i == j) continue;
+                    Team guest = teams.ElementAt(j);
+                    Match match = home.matches[guest.id];
+
+                    string scoreString = match.homeScore + ":" + match.guestScore;
+                    object value = dataGridViewSpain.Rows[i].Cells["Team" + (j + 1)].Value;
+                    if (value != null)
+                    {
+                        value = scoreString + "\n" + value;
+                    }
+                    else
+                    {
+                        value = scoreString;
+                    }
+                    dataGridViewSpain.Rows[i].Cells["Team" + (j + 1)].Value = value;
+
+                    scoreString = match.guestScore + ":" + match.homeScore;
+                    value = dataGridViewSpain.Rows[j].Cells["Team" + (i + 1)].Value;
+                    if (value != null)
+                    {
+                        value = value + "\n" + scoreString;
+                    }
+                    else
+                    {
+                        value = scoreString;
+                    }
+                    dataGridViewSpain.Rows[j].Cells["Team" + (i + 1)].Value = value;
+                }
             }
             dataGridViewSpain.Show();
         }

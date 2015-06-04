@@ -12,5 +12,6 @@ namespace FootballSimulator.Classes
         public string name;
         public double rating;
         public int points = 0;
+        public Dictionary<int, Match> matches = new Dictionary<int, Match>();
     }
 }
