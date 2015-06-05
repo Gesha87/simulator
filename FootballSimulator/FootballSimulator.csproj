@@ -78,6 +78,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Classes\DB.cs" />
+    <Compile Include="Classes\RandomGenerator.cs" />
     <Compile Include="Classes\Score.cs" />
     <Compile Include="Classes\ScoreCollection.cs" />
     <Compile Include="Classes\Team.cs" />

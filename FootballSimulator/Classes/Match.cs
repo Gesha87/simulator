@@ -21,26 +21,27 @@ namespace FootballSimulator.Classes
         {
             home = homeTeam;
             guest = guestTeam;
-            RandomNumberGenerator generator = RandomNumberGenerator.Create();
-            byte[] bytes = new byte[4];
-            generator.GetBytes(bytes);
-            double val = (double)BitConverter.ToUInt32(bytes, 0) / UInt32.MaxValue;
-            
+            double val = RandomGenerator.getInstance().getDouble();         
             ScoreCollection score = ScoreCollection.getInstance();
+            double diff = homeTeam.rating - guestTeam.rating;
+            double change = diff / 4;
+            percentDraw -= change * percentDraw / (1 - percentWinHome);
+            percentWinHome += change;
+            int[] balls;
             if (val < percentWinHome)
             {
-
-                homeScore = 1;
+                balls = score.homeWin(diff);   
             }
             else if (val < percentWinHome + percentDraw)
             {
-                homeScore = 1;
-                guestScore = 1;
+                balls = score.draw(diff);
             }
             else
             {
-                guestScore = 1;
+                balls = score.guestWin(diff);
             }
+            homeScore = balls[0];
+            guestScore = balls[1];
         }
     }
 }

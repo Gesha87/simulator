@@ -8,9 +8,9 @@ namespace FootballSimulator.Classes
 {
     class Score
     {
-        public int id = 0;
-        public int home = 0;
-        public int guest = 0;
-        public int count = 0;
+        public int id { get; set; }
+        public int home { get; set; }
+        public int guest { get; set; }
+        public int count { get; set; }
     }
 }

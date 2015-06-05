@@ -59,14 +59,36 @@ namespace FootballSimulator.Classes
             return teams;
         }
 
-        public void loadScores()
+        public void loadScores(ScoreCollection collection)
         {
             SqlCommand command = connection.CreateCommand();
             command.CommandText = "SELECT * from Score";
             SqlDataReader reader = command.ExecuteReader();
             while (reader.Read())
             {
-
+                int outcome = reader.GetInt32(reader.GetOrdinal("outcome"));
+                int id = reader.GetInt32(reader.GetOrdinal("id"));
+                int count = reader.GetInt32(reader.GetOrdinal("count"));
+                string scoreString = reader.GetString(reader.GetOrdinal("score"));
+                string[] parts = scoreString.Split(new char[] {':'});
+                int scoreHome = int.Parse(parts[0]);
+                int scoreGuest = int.Parse(parts[1]);
+                Score score = new Score() { id = id, count = count, guest = scoreGuest, home = scoreHome };
+                if (outcome > 0)
+                {
+                    collection.homeWinScores.Add(score);
+                    collection.homeWinCount += count;
+                }
+                else if (outcome < 0)
+                {
+                    collection.guestWinScores.Add(score);
+                    collection.guestWinCount += count;
+                }
+                else
+                {
+                    collection.drawScores.Add(score);
+                    collection.drawCount += count;
+                }
             }
             reader.Close();
         }
