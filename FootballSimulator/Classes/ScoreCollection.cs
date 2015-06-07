@@ -15,6 +15,13 @@ namespace FootballSimulator.Classes
         public int guestWinCount = 0;
         public int drawCount = 0;
 
+        public Dictionary<int, int> outcomeRatio = new Dictionary<int, int>();
+        public Dictionary<int, Dictionary<int, int>> differenceRatio = new Dictionary<int, Dictionary<int, int>>();
+        public Dictionary<int, List<Score>> scoreLists = new Dictionary<int, List<Score>>();
+        public int outcomeCount = 0;
+        public Dictionary<int, int> diffCount = new Dictionary<int, int>();
+        public Dictionary<int, int> scoreCounts = new Dictionary<int, int>();
+
         private static ScoreCollection instance;
 
         public static ScoreCollection getInstance()
@@ -29,27 +36,53 @@ namespace FootballSimulator.Classes
 
         private ScoreCollection()
         {
+            for (int i = -1; i <= 1; i++)
+            {
+                outcomeRatio.Add(i , 0);
+                differenceRatio.Add(i, new Dictionary<int, int>());
+            }
+            for (int i = -7; i <= 7; i++)
+            {
+                differenceRatio[Math.Sign(i)].Add(i, 0);
+                scoreCounts.Add(i, 0);
+                scoreLists.Add(i, new List<Score>());
+            }
             DB.getInstance().loadScores(this);
         }
 
-        public int[] homeWin(double diff)
+        public Score getScore(double diff)
         {
-            return getScore(homeWinScores, homeWinCount);
+            int outcome = getRandom(outcomeRatio, diff);
+            int difference = getRandom(differenceRatio[outcome], diff);
+            Score score = selectScore(scoreLists[difference], scoreCounts[difference]);
+
+            return score;
         }
 
-        public int[] draw(double diff)
+        public int getRandom(Dictionary<int, int> dict, double diff)
         {
-            return getScore(drawScores, drawCount);
+            Dictionary<int, double> temp = new Dictionary<int, double>();
+            int count = dict.Values.Sum();
+            int outcome = dict.Keys.First();
+            double val = RandomGenerator.getInstance().getDouble() * count;
+            double change = Math.Atan(diff / 1.4) * 2 / Math.PI;
+
+            double cur = 0;
+            foreach (int key in temp.Keys)
+            {
+                cur += temp[key];
+                if (val <= cur)
+                {
+                    outcome = key;
+                    break;
+                }
+            }
+
+            return outcome;
         }
 
-        public int[] guestWin(double diff)
+        private Score selectScore(List<Score> list, int count)
         {
-            return getScore(guestWinScores, guestWinCount);
-        }
-
-        private int[] getScore(List<Score> list, int count)
-        {
-            int[] balls = new int[2] { 9, 9 };
             double val = RandomGenerator.getInstance().getDouble() * count;
             int cur = 0;
             foreach (Score score in list)
@@ -57,12 +90,27 @@ namespace FootballSimulator.Classes
                 cur += score.count;
                 if (val <= cur)
                 {
-                    balls = new int[2] { score.home, score.guest };
-                    break;
+                    return score;
                 }
             }
 
-            return balls;
+            return list.First();
         }
+
+        /*private double getRandom(double diff)
+        {
+            double val = RandomGenerator.getInstance().getDouble();
+            double change = Math.Atan(diff) * 2 / Math.PI;
+            if (diff > 0)
+            {
+                val += change * (1 - val);
+            }
+            else
+            {
+                val += change * val;
+            }
+
+            return val;
+        }*/
     }
 }
