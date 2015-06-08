@@ -59,7 +59,7 @@ namespace FootballSimulator.Classes
             return teams;
         }
 
-        public void loadScores(ScoreCollection collection)
+        public void loadScores(ScoreManager collection)
         {
             SqlCommand command = connection.CreateCommand();
             command.CommandText = "SELECT * from Score";
@@ -76,57 +76,7 @@ namespace FootballSimulator.Classes
                 collection.differenceRatio[Math.Sign(outcome)][outcome] += count;
                 collection.scoreCounts[outcome] += count;
                 collection.scoreLists[outcome].Add(score);
-                if (outcome > 0)
-                {
-                    collection.homeWinScores.Add(score);
-                    collection.homeWinCount += count;
-                }
-                else if (outcome < 0)
-                {
-                    collection.guestWinScores.Add(score);
-                    collection.guestWinCount += count;
-                }
-                else
-                {
-                    collection.drawScores.Add(score);
-                    collection.drawCount += count;
-                }
-                collection.outcomeCount += count;
             }
-            collection.homeWinScores.Sort(delegate(Score one, Score two)
-            {
-                int outcomeOne = one.home - one.guest;
-                int outcomeGuest = two.home - two.guest;
-                if (outcomeOne > outcomeGuest)
-                {
-                    return 1;
-                }
-                else if (outcomeOne < outcomeGuest)
-                {
-                    return -1;
-                }
-                else
-                {
-                    return one.home.CompareTo(two.home);
-                }
-            });
-            collection.guestWinScores.Sort(delegate(Score one, Score two)
-            {
-                int outcomeOne = one.guest - one.home;
-                int outcomeGuest = two.guest - two.home;
-                if (outcomeOne > outcomeGuest)
-                {
-                    return 1;
-                }
-                else if (outcomeOne < outcomeGuest)
-                {
-                    return -1;
-                }
-                else
-                {
-                    return one.guest.CompareTo(two.guest);
-                }
-            });
             reader.Close();
         }
     }

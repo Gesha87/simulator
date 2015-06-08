@@ -23,7 +23,7 @@ namespace FootballSimulator.Classes
             guest = guestTeam;
 
             double val = RandomGenerator.getInstance().getDouble();         
-            ScoreCollection collection = ScoreCollection.getInstance();
+            ScoreManager collection = ScoreManager.getInstance();
             double diff = (homeTeam.rating - guestTeam.rating) / 1.4;
             Score score = collection.getScore(homeTeam.rating - guestTeam.rating);
             /*double change = Math.Atan(diff) * 2 / Math.PI;
