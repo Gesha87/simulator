@@ -14,18 +14,15 @@ namespace FootballSimulator.Classes
         public int homeScore = 0;
         public int guestScore = 0;
 
-        private double chanceWinHome = 0.456918219;
-        private double chanceDraw = 0.256815106;
-
         public Match(Team homeTeam, Team guestTeam, bool countHome = true)
         {
             home = homeTeam;
             guest = guestTeam;
 
             double val = RandomGenerator.getInstance().getDouble();         
-            ScoreManager collection = ScoreManager.getInstance();
-            double diff = (homeTeam.rating - guestTeam.rating) / 1.4;
-            Score score = collection.getScore(homeTeam.rating - guestTeam.rating);
+            ScoreManager manager = ScoreManager.getInstance();
+            //double diff = (homeTeam.rating - guestTeam.rating) / 1.4;
+            Score score = manager.getScore(homeTeam.rating - guestTeam.rating);
             /*double change = Math.Atan(diff) * 2 / Math.PI;
             if (diff < 0)
             {

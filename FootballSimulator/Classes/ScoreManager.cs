@@ -61,7 +61,15 @@ namespace FootballSimulator.Classes
         public Score getScore(double diff)
         {
             int outcome = getOutcome(diff);
-            int difference = getDifference(differenceRatio[outcome], diff);
+            int difference = 0;
+            switch (outcome)
+            {
+                case 1:
+                    difference = getDifferenceHomeWin(diff);
+                    break;
+                case -1:
+                    break;
+            }
             Score score = selectScore(scoreLists[difference], scoreCounts[difference]);
 
             return score;
@@ -81,17 +89,17 @@ namespace FootballSimulator.Classes
             }
             else
             {
-                double localChanceWinGuest = 1 - chanceWinHome - chanceDraw;
-                localChanceDraw -= change * (chanceDraw - localChanceWinGuest * (1 - change));
+                double localChanceWinGuest = 1 - localChanceWinHome - localChanceDraw;
+                localChanceDraw -= change * (localChanceDraw - localChanceWinGuest * (1 - change));
                 localChanceWinGuest -= change * localChanceWinGuest;
-                localChanceWinHome = 1 - chanceDraw - localChanceWinGuest;
+                localChanceWinHome = 1 - localChanceDraw - localChanceWinGuest;
             }
 
-            if (val < chanceWinHome)
+            if (val < localChanceWinHome)
             {
                 outcome = 1;
             }
-            else if (val < chanceWinHome + chanceDraw)
+            else if (val < localChanceWinHome + localChanceDraw)
             {
                 outcome = 0;
             }
@@ -103,9 +111,34 @@ namespace FootballSimulator.Classes
             return outcome;
         }
 
-        private int getDifference(Dictionary<int, int> dict, double diff)
+        private int getDifferenceHomeWin(double diff)
         {
-            return dict.Keys.First();
+            Dictionary<int, double> temp = new Dictionary<int, double>();
+            foreach (int key in differenceRatio[1].Keys)
+            {
+                temp.Add(key, (double)differenceRatio[1][key]);
+            }
+            double val = RandomGenerator.getInstance().getDouble();
+            if (diff >= 1)
+            {
+                for (int i = 1; i < diff; i++)
+                {
+                    temp[i] = temp[1];
+                }
+            }
+            val *= temp.Values.Sum();
+
+            double cur = 0;
+            foreach (int key in temp.Keys)
+            {
+                cur += temp[key];
+                if (val <= cur)
+                {
+                    return key;
+                }
+            }
+
+            return 1;
         }
 
         private Score selectScore(List<Score> list, int count)
