@@ -86,6 +86,7 @@
             dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.dataGridViewSpain.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
             this.dataGridViewSpain.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.dataGridViewSpain.CausesValidation = false;
             this.dataGridViewSpain.ColumnHeadersVisible = false;
             dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
             dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
@@ -96,12 +97,12 @@
             dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.dataGridViewSpain.DefaultCellStyle = dataGridViewCellStyle2;
             this.dataGridViewSpain.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
+            this.dataGridViewSpain.EnableHeadersVisualStyles = false;
             this.dataGridViewSpain.Location = new System.Drawing.Point(16, 74);
             this.dataGridViewSpain.Margin = new System.Windows.Forms.Padding(0);
             this.dataGridViewSpain.MultiSelect = false;
             this.dataGridViewSpain.Name = "dataGridViewSpain";
             this.dataGridViewSpain.ReadOnly = true;
-            this.dataGridViewSpain.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Sunken;
             dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control;
             dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
@@ -110,10 +111,10 @@
             dataGridViewCellStyle3.SelectionForeColor = System.Drawing.Color.HotPink;
             this.dataGridViewSpain.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
             this.dataGridViewSpain.RowHeadersVisible = false;
-            this.dataGridViewSpain.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
             dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
             this.dataGridViewSpain.RowsDefaultCellStyle = dataGridViewCellStyle4;
+            this.dataGridViewSpain.ScrollBars = System.Windows.Forms.ScrollBars.None;
             this.dataGridViewSpain.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dataGridViewSpain.ShowCellToolTips = false;
             this.dataGridViewSpain.Size = new System.Drawing.Size(1158, 705);

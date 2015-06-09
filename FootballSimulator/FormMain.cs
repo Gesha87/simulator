@@ -49,6 +49,9 @@ namespace FootballSimulator
             dataGridViewSpain.Columns["Team"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft;
             for (int position = 1; position <= teams.Count; position++)
             {
+                DataGridViewHTMLColumn column = new DataGridViewHTMLColumn();
+                column.Name = "Team" + position;
+                column.HeaderText = position.ToString();
                 dataGridViewSpain.Columns.Add("Team" + position, position.ToString());
                 dataGridViewSpain.Columns["Team" + position].Width = 32;
                 dataGridViewSpain.Columns["Team" + position].SortMode = DataGridViewColumnSortMode.NotSortable;
