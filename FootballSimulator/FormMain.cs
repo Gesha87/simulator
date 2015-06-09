@@ -17,19 +17,12 @@ namespace FootballSimulator
     {
         public FormMain()
         {
-            InitializeComponent();
-            dataGridViewSpain.ColumnHeadersDefaultCellStyle.Font = new Font("Microsoft Sans Serif", 8.25f, FontStyle.Bold);
-            dataGridViewSpain.DefaultCellStyle.Font = new Font("Microsoft Sans Serif", 8.25f, FontStyle.Bold);
-            //dataGridViewSpain.ColumnHeadersDefaultCellStyle.BackColor = Color.Transparent;
-            //dataGridViewSpain.DefaultCellStyle.BackColor = Color.FromArgb(198, 255, 255, 255);
-            //dataGridViewSpain.DefaultCellStyle.SelectionBackColor = Color.Transparent;
-            dataGridViewSpain.MultiSelect = false;
-            dataGridViewSpain.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            dataGridViewSpain.ColumnHeadersHeight = 41;
-            dataGridViewSpain.ShowCellToolTips = false;
-            dataGridViewSpain.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
-            dataGridViewSpain.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewSpain.RowHeadersVisible = false;   
+            InitializeComponent(); 
+        }
+
+        void dataGridViewSpain_SelectionChanged(object sender, EventArgs e)
+        {
+            dataGridViewSpain.ClearSelection();
         }
 
         private void buttonClose_Click(object sender, EventArgs e)
@@ -54,11 +47,11 @@ namespace FootballSimulator
             dataGridViewSpain.Columns.Add("Team", "Команда");
             dataGridViewSpain.Columns["Team"].Width = 128;
             dataGridViewSpain.Columns["Team"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            foreach (Team team in teams)
+            for (int position = 1; position <= teams.Count; position++)
             {
-                dataGridViewSpain.Columns.Add("Team" + team.id, team.id.ToString());
-                dataGridViewSpain.Columns["Team" + team.id].Width = 32;
-                dataGridViewSpain.Columns["Team" + team.id].SortMode = DataGridViewColumnSortMode.NotSortable;
+                dataGridViewSpain.Columns.Add("Team" + position, position.ToString());
+                dataGridViewSpain.Columns["Team" + position].Width = 32;
+                dataGridViewSpain.Columns["Team" + position].SortMode = DataGridViewColumnSortMode.NotSortable;
             }
             dataGridViewSpain.Columns.Add("Games", "Иг");
             dataGridViewSpain.Columns["Games"].Width = 32;
@@ -70,12 +63,29 @@ namespace FootballSimulator
             dataGridViewSpain.Columns["Lost"].Width = 32;
             dataGridViewSpain.Columns.Add("Scores", "Мячи");
             dataGridViewSpain.Columns["Scores"].Width = 46;
-            dataGridViewSpain.Columns["Scores"].SortMode = DataGridViewColumnSortMode.NotSortable;
             dataGridViewSpain.Columns.Add("Diff", "Разн.");
             dataGridViewSpain.Columns["Diff"].Width = 46;
-            dataGridViewSpain.Columns["Diff"].SortMode = DataGridViewColumnSortMode.NotSortable;
             dataGridViewSpain.Columns.Add("Points", "Оч");
             dataGridViewSpain.Columns["Points"].Width = 32;
+            int index = dataGridViewSpain.Rows.Add();
+            DataGridViewRow header = dataGridViewSpain.Rows[index];
+            header.DefaultCellStyle.Font = new Font("Microsoft San Serif", 8.25f, FontStyle.Bold);
+            header.DefaultCellStyle.BackColor = ColorTranslator.FromHtml("#E0E5E5");
+            header.Height = 32;
+            header.Cells["Position"].Value = "М";
+            header.Cells["Team"].Value = "Команда";
+            for (int position = 1; position <= teams.Count; position++)
+            {
+                header.Cells["Team" + position].Value = position;
+            }
+            header.Cells["Points"].Value = "Оч";
+            header.Cells["Games"].Value = "Иг";
+            header.Cells["Won"].Value = "В";
+            header.Cells["Tied"].Value = "Н";
+            header.Cells["Lost"].Value = "П";
+            header.Cells["Scores"].Value = "Мячи";
+            header.Cells["Diff"].Value = "Разн.";
+            
             dataGridViewSpain.Rows.Add(count);
 
             for (int i = 0; i < count; i++)
@@ -154,11 +164,11 @@ namespace FootballSimulator
                 }
             });
 
-            for (int i = 0; i < count; i++)
+            for (int i = 1; i <= count; i++)
             {
-                Team home = teams.ElementAt(i);
+                Team home = teams.ElementAt(i-1);
                 dataGridViewSpain.Rows[i].Height = 32;
-                dataGridViewSpain.Rows[i].Cells["Position"].Value = i + 1;
+                dataGridViewSpain.Rows[i].Cells["Position"].Value = i;
                 dataGridViewSpain.Rows[i].Cells["Team"].Value = home.name;
                 dataGridViewSpain.Rows[i].Cells["Points"].Value = home.points;
                 dataGridViewSpain.Rows[i].Cells["Games"].Value = home.games;
@@ -168,15 +178,20 @@ namespace FootballSimulator
                 dataGridViewSpain.Rows[i].Cells["Scores"].Value = home.scored + "-" + home.missed;
                 int diff = home.scored - home.missed;
                 dataGridViewSpain.Rows[i].Cells["Diff"].Value = diff > 0 ? "+" + diff : diff.ToString();
-                dataGridViewSpain.Rows[i].Cells["Diff"].Tag = diff;
-                for (int j = 0; j < count; j++)
+                for (int j = 1; j <= count; j++)
                 {
-                    if (i == j) continue;
-                    Team guest = teams.ElementAt(j);
+                    if (i == j)
+                    {
+                        dataGridViewSpain.Rows[i].Cells["Team" + i].Value = i;
+                        dataGridViewSpain.Rows[i].Cells["Team" + i].Style.BackColor = ColorTranslator.FromHtml("#777");
+                        dataGridViewSpain.Rows[i].Cells["Team" + i].Style.ForeColor = Color.White;
+                        continue;
+                    }
+                    Team guest = teams.ElementAt(j-1);
                     Match match = home.matches[guest.id];
 
                     string scoreString = match.homeScore + ":" + match.guestScore;
-                    object value = dataGridViewSpain.Rows[i].Cells["Team" + (j + 1)].Value;
+                    object value = dataGridViewSpain.Rows[i].Cells["Team" + j].Value;
                     if (value != null)
                     {
                         value = scoreString + "\n" + value;
@@ -185,10 +200,10 @@ namespace FootballSimulator
                     {
                         value = scoreString;
                     }
-                    dataGridViewSpain.Rows[i].Cells["Team" + (j + 1)].Value = value;
+                    dataGridViewSpain.Rows[i].Cells["Team" + j].Value = value;
 
                     scoreString = match.guestScore + ":" + match.homeScore;
-                    value = dataGridViewSpain.Rows[j].Cells["Team" + (i + 1)].Value;
+                    value = dataGridViewSpain.Rows[j].Cells["Team" + i].Value;
                     if (value != null)
                     {
                         value = value + "\n" + scoreString;
@@ -197,24 +212,18 @@ namespace FootballSimulator
                     {
                         value = scoreString;
                     }
-                    dataGridViewSpain.Rows[j].Cells["Team" + (i + 1)].Value = value;
+                    dataGridViewSpain.Rows[j].Cells["Team" + i].Value = value;
                 }
             }
-            dataGridViewSpain.ColumnHeadersHeight = 50;
-            int gridHeight = dataGridViewSpain.Rows.GetRowsHeight(DataGridViewElementStates.None) + dataGridViewSpain.ColumnHeadersHeight;
-            int gridWidth = dataGridViewSpain.Columns.GetColumnsWidth(DataGridViewElementStates.None);
-            dataGridViewSpain.ClientSize = new Size(gridWidth + 1, gridHeight);
             dataGridViewSpain.Show();
+            int gridHeight = dataGridViewSpain.Rows.GetRowsHeight(DataGridViewElementStates.None);
+            int gridWidth = dataGridViewSpain.Columns.GetColumnsWidth(DataGridViewElementStates.None);
+            dataGridViewSpain.ClientSize = new Size(gridWidth + 1, gridHeight + 1);
         }
 
         private void FormMain_Load(object sender, EventArgs e)
         {
             ScoreManager.getInstance().loadScores();
-        }
-
-        private void FormMain_FormClosing(object sender, FormClosingEventArgs e)
-        {
-
         }
     }
 }
