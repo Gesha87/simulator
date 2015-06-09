@@ -19,8 +19,17 @@ namespace FootballSimulator
         {
             InitializeComponent();
             dataGridViewSpain.ColumnHeadersDefaultCellStyle.Font = new Font("Microsoft Sans Serif", 8.25f, FontStyle.Bold);
+            dataGridViewSpain.DefaultCellStyle.Font = new Font("Microsoft Sans Serif", 8.25f, FontStyle.Bold);
+            //dataGridViewSpain.ColumnHeadersDefaultCellStyle.BackColor = Color.Transparent;
+            //dataGridViewSpain.DefaultCellStyle.BackColor = Color.FromArgb(198, 255, 255, 255);
+            //dataGridViewSpain.DefaultCellStyle.SelectionBackColor = Color.Transparent;
+            dataGridViewSpain.MultiSelect = false;
+            dataGridViewSpain.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            dataGridViewSpain.ColumnHeadersHeight = 41;
+            dataGridViewSpain.ShowCellToolTips = false;
             dataGridViewSpain.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
             dataGridViewSpain.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewSpain.RowHeadersVisible = false;   
         }
 
         private void buttonClose_Click(object sender, EventArgs e)
@@ -39,7 +48,7 @@ namespace FootballSimulator
             int count = teams.Count;
 
             dataGridViewSpain.Rows.Clear();
-            dataGridViewSpain.Columns.Clear();       
+            dataGridViewSpain.Columns.Clear();
             dataGridViewSpain.Columns.Add("Position", "М");
             dataGridViewSpain.Columns["Position"].Width = 32;
             dataGridViewSpain.Columns.Add("Team", "Команда");
@@ -49,7 +58,7 @@ namespace FootballSimulator
             {
                 dataGridViewSpain.Columns.Add("Team" + team.id, team.id.ToString());
                 dataGridViewSpain.Columns["Team" + team.id].Width = 32;
-                dataGridViewSpain.Columns["Team" + team.id].SortMode = DataGridViewColumnSortMode.NotSortable;            
+                dataGridViewSpain.Columns["Team" + team.id].SortMode = DataGridViewColumnSortMode.NotSortable;
             }
             dataGridViewSpain.Columns.Add("Games", "Иг");
             dataGridViewSpain.Columns["Games"].Width = 32;
@@ -200,12 +209,12 @@ namespace FootballSimulator
 
         private void FormMain_Load(object sender, EventArgs e)
         {
-            
+            ScoreManager.getInstance().loadScores();
         }
 
         private void FormMain_FormClosing(object sender, FormClosingEventArgs e)
         {
-            
+
         }
     }
 }

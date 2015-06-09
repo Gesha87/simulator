@@ -18,38 +18,9 @@ namespace FootballSimulator.Classes
         {
             home = homeTeam;
             guest = guestTeam;
-
             double val = RandomGenerator.getInstance().getDouble();         
             ScoreManager manager = ScoreManager.getInstance();
-            //double diff = (homeTeam.rating - guestTeam.rating) / 1.4;
             Score score = manager.getScore(homeTeam.rating - guestTeam.rating);
-            /*double change = Math.Atan(diff) * 2 / Math.PI;
-            if (diff < 0)
-            {
-                chanceDraw += change * (chanceDraw - chanceWinHome * (1 + change));
-                chanceWinHome += change * chanceWinHome;
-            }
-            else
-            {
-                double chanceWinGuest = 1 - chanceWinHome - chanceDraw;
-                chanceDraw -= change * (chanceDraw - chanceWinGuest * (1 - change));
-                chanceWinGuest -= change * chanceWinGuest;
-                chanceWinHome = 1 - chanceDraw - chanceWinGuest;
-            }
-            
-            int[] balls;
-            if (val < chanceWinHome)
-            {
-                balls = score.homeWin(diff);   
-            }
-            else if (val < chanceWinHome + chanceDraw)
-            {
-                balls = score.draw(diff);
-            }
-            else
-            {
-                balls = score.guestWin(diff);
-            }*/
             homeScore = score.home;
             guestScore = score.guest;
         }

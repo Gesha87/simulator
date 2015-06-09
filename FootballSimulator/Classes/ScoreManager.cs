@@ -8,18 +8,9 @@ namespace FootballSimulator.Classes
 {
     class ScoreManager
     {
-        //public List<Score> homeWinScores = new List<Score>();
-        //public List<Score> guestWinScores = new List<Score>();
-        //public List<Score> drawScores = new List<Score>();
-        //public int homeWinCount = 0;
-        //public int guestWinCount = 0;
-        //public int drawCount = 0;
-
         public Dictionary<int, int> outcomeRatio = new Dictionary<int, int>();
         public Dictionary<int, Dictionary<int, int>> differenceRatio = new Dictionary<int, Dictionary<int, int>>();
         public Dictionary<int, List<Score>> scoreLists = new Dictionary<int, List<Score>>();
-        //public int outcomeCount = 0;
-        //public Dictionary<int, int> diffCount = new Dictionary<int, int>();
         public Dictionary<int, int> scoreCounts = new Dictionary<int, int>();
 
         private static ScoreManager instance;
@@ -36,14 +27,14 @@ namespace FootballSimulator.Classes
             return instance;
         }
 
-        private ScoreManager()
+        public void loadScores()
         {
             for (int i = -1; i <= 1; i++)
             {
-                outcomeRatio.Add(i , 0);
+                outcomeRatio.Add(i, 0);
                 differenceRatio.Add(i, new Dictionary<int, int>());
             }
-            for (int i = -7; i <= 7; i++)
+            for (int i = -9; i <= 9; i++)
             {
                 differenceRatio[Math.Sign(i)].Add(i, 0);
                 scoreCounts.Add(i, 0);
@@ -68,6 +59,7 @@ namespace FootballSimulator.Classes
                     difference = getDifferenceHomeWin(diff);
                     break;
                 case -1:
+                    difference = getDifferenceGuestWin(diff);
                     break;
             }
             Score score = selectScore(scoreLists[difference], scoreCounts[difference]);
@@ -81,7 +73,7 @@ namespace FootballSimulator.Classes
             double localChanceDraw = chanceDraw;
             int outcome = 0;
             double val = RandomGenerator.getInstance().getDouble();
-            double change = Math.Atan(diff / 1.4) * 2 / Math.PI;
+            double change = Math.Atan(diff) * 2 / Math.PI;
             if (diff < 0)
             {
                 localChanceDraw += change * (chanceDraw - chanceWinHome * (1 + change));
@@ -113,23 +105,38 @@ namespace FootballSimulator.Classes
 
         private int getDifferenceHomeWin(double diff)
         {
-            Dictionary<int, double> temp = new Dictionary<int, double>();
-            foreach (int key in differenceRatio[1].Keys)
-            {
-                temp.Add(key, (double)differenceRatio[1][key]);
-            }
+            Dictionary<int, int> temp = new Dictionary<int, int>(differenceRatio[1]);
             double val = RandomGenerator.getInstance().getDouble();
             if (diff >= 1)
             {
-                for (int i = 1; i < diff; i++)
+                for (int i = 0; i >= -7; i--)
                 {
-                    temp[i] = temp[1];
+                    temp.Add(i, temp[2 - i]);
+                }
+                int d = (int)diff;
+                if (d > 8) d = 8;
+                for (int i = 9; i >= 1; i--)
+                {
+                    temp[i] = temp[i - d];
                 }
             }
-            val *= temp.Values.Sum();
+            if (diff < 0)
+            {
+                double change = -Math.Atan(diff) * 2 / Math.PI;
+                for (int i = 9; i >= 2; i--)
+                {
+                    temp[i] -= (int)Math.Floor(temp[i] * change);
+                }
+            }
+            int count = 0;
+            for (int i = 1; i <= 9; i++) 
+            {
+                count += temp[i];
+            }
+            val *= count;
 
             double cur = 0;
-            foreach (int key in temp.Keys)
+            foreach (int key in differenceRatio[1].Keys)
             {
                 cur += temp[key];
                 if (val <= cur)
@@ -139,6 +146,51 @@ namespace FootballSimulator.Classes
             }
 
             return 1;
+        }
+
+        private int getDifferenceGuestWin(double diff)
+        {
+            Dictionary<int, int> temp = new Dictionary<int, int>(differenceRatio[-1]);
+            double val = RandomGenerator.getInstance().getDouble();
+            if (diff <= -1)
+            {
+                for (int i = 0; i <= 7; i++)
+                {
+                    temp.Add(i, temp[i - 2]);
+                }
+                int d = -(int)diff;
+                if (d > 8) d = 8;
+                for (int i = -9; i <= -1; i++)
+                {
+                    temp[i] = temp[i + d];
+                }
+            }
+            if (diff > 0)
+            {
+                double change = Math.Atan(diff) * 2 / Math.PI;
+                for (int i = -9; i <= -2; i++)
+                {
+                    temp[i] -= (int)Math.Floor(temp[i] * change);
+                }
+            }
+            int count = 0;
+            for (int i = -1; i >= -9; i--)
+            {
+                count += temp[i];
+            }
+            val *= count;
+
+            double cur = 0;
+            foreach (int key in differenceRatio[-1].Keys)
+            {
+                cur += temp[key];
+                if (val <= cur)
+                {
+                    return key;
+                }
+            }
+
+            return -1;
         }
 
         private Score selectScore(List<Score> list, int count)
@@ -156,21 +208,5 @@ namespace FootballSimulator.Classes
 
             return list.First();
         }
-
-        /*private double getRandom(double diff)
-        {
-            double val = RandomGenerator.getInstance().getDouble();
-            double change = Math.Atan(diff) * 2 / Math.PI;
-            if (diff > 0)
-            {
-                val += change * (1 - val);
-            }
-            else
-            {
-                val += change * val;
-            }
-
-            return val;
-        }*/
     }
 }
