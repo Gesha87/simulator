@@ -42,8 +42,13 @@ namespace FootballSimulator
 
         private void buttonSimulate_Click(object sender, EventArgs e)
         {
-            List<Team> teams = DB.getInstance().getTeams(7);
+            List<Team> teams = DB.getInstance().getTeams((int)comboBoxCountry.SelectedValue);
             int count = teams.Count;
+            if (count == 0)
+            {
+                dataGridViewResults.Hide();
+                return;
+            }
 
             dataGridViewResults.Rows.Clear();
             dataGridViewResults.Columns.Clear();
