@@ -83,6 +83,11 @@
     <Compile Include="Classes\ScoreManager.cs" />
     <Compile Include="Classes\Team.cs" />
     <Compile Include="Classes\Match.cs" />
+    <Compile Include="dataDataSet.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>dataDataSet.xsd</DependentUpon>
+    </Compile>
     <Compile Include="FormMain.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -104,6 +109,17 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <None Include="dataDataSet.xsc">
+      <DependentUpon>dataDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="dataDataSet.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>dataDataSet.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="dataDataSet.xss">
+      <DependentUpon>dataDataSet.xsd</DependentUpon>
+    </None>
     <None Include="FootballSimulator_TemporaryKey.pfx" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

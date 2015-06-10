@@ -42,7 +42,7 @@ namespace FootballSimulator
 
         private void buttonSimulate_Click(object sender, EventArgs e)
         {
-            List<Team> teams = DB.getInstance().getTeams(1);
+            List<Team> teams = DB.getInstance().getTeams(7);
             int count = teams.Count;
 
             dataGridViewResults.Rows.Clear();
@@ -50,7 +50,7 @@ namespace FootballSimulator
             dataGridViewResults.Columns.Add("Position", "М");
             dataGridViewResults.Columns["Position"].Width = 32;
             dataGridViewResults.Columns.Add("Team", "Команда");
-            dataGridViewResults.Columns["Team"].Width = 20;
+            dataGridViewResults.Columns["Team"].Width = 128;
             dataGridViewResults.Columns["Team"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft;
             for (int position = 1; position <= teams.Count; position++)
             {
@@ -71,7 +71,6 @@ namespace FootballSimulator
             dataGridViewResults.Columns["Diff"].Width = 46;
             dataGridViewResults.Columns.Add("Points", "Оч");
             dataGridViewResults.Columns["Points"].Width = 32;
-            dataGridViewResults.Columns["Team"].Width = 1147 - dataGridViewResults.Columns.GetColumnsWidth(DataGridViewElementStates.None) + 20;
             int index = dataGridViewResults.Rows.Add();
             DataGridViewRow header = dataGridViewResults.Rows[index];
             header.DefaultCellStyle.Font = new Font("Microsoft San Serif", 8.25f, FontStyle.Bold);
@@ -231,6 +230,8 @@ namespace FootballSimulator
 
         private void FormMain_Load(object sender, EventArgs e)
         {
+            // TODO: This line of code loads data into the 'dataDataSet.Country' table. You can move, or remove it, as needed.
+            this.countryTableAdapter.Fill(this.dataDataSet.Country);
             ScoreManager.getInstance().loadScores();
         }
 
@@ -277,6 +278,24 @@ namespace FootballSimulator
             }
 
             return color;
+        }
+
+        private void comboBoxCountry_DrawItem(object sender, DrawItemEventArgs e)
+        {
+            e.DrawBackground();
+            if (e.State == DrawItemState.Focus)
+                e.DrawFocusRectangle();
+            var index = e.Index;
+            if (index < 0 || index >= comboBoxCountry.Items.Count) return;
+            var item = (DataRowView)comboBoxCountry.Items[index];
+            string text = (item == null) ? "(null)" : item.Row["name"].ToString();
+            using (var brush = new SolidBrush(e.ForeColor))
+            {
+                StringFormat format = new StringFormat();
+                format.LineAlignment = StringAlignment.Center;
+                e.Graphics.TextRenderingHint = System.Drawing.Text.TextRenderingHint.ClearTypeGridFit;
+                e.Graphics.DrawString(text, e.Font, brush, e.Bounds, format);
+            }
         }
     }
 }
