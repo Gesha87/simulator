@@ -39,12 +39,12 @@
             this.buttonSimulate = new System.Windows.Forms.Button();
             this.dataGridViewResults = new System.Windows.Forms.DataGridView();
             this.comboBoxCountry = new System.Windows.Forms.ComboBox();
-            this.dataDataSet = new FootballSimulator.dataDataSet();
             this.countryBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.dataDataSet = new FootballSimulator.dataDataSet();
             this.countryTableAdapter = new FootballSimulator.dataDataSetTableAdapters.CountryTableAdapter();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewResults)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataDataSet)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.countryBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataDataSet)).BeginInit();
             this.SuspendLayout();
             // 
             // buttonClose
@@ -133,11 +133,9 @@
             this.dataGridViewResults.TabIndex = 3;
             this.dataGridViewResults.Visible = false;
             this.dataGridViewResults.CellPainting += new System.Windows.Forms.DataGridViewCellPaintingEventHandler(this.dataGridViewResults_CellPainting);
-            this.dataGridViewResults.SelectionChanged += new System.EventHandler(this.dataGridViewSpain_SelectionChanged);
             // 
             // comboBoxCountry
             // 
-            this.comboBoxCountry.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.comboBoxCountry.Cursor = System.Windows.Forms.Cursors.Hand;
             this.comboBoxCountry.DataSource = this.countryBindingSource;
             this.comboBoxCountry.DisplayMember = "name";
@@ -146,22 +144,22 @@
             this.comboBoxCountry.FormattingEnabled = true;
             this.comboBoxCountry.ItemHeight = 33;
             this.comboBoxCountry.Location = new System.Drawing.Point(335, 16);
-            this.comboBoxCountry.MaxDropDownItems = 10;
+            this.comboBoxCountry.MaxDropDownItems = 5;
             this.comboBoxCountry.Name = "comboBoxCountry";
             this.comboBoxCountry.Size = new System.Drawing.Size(251, 39);
             this.comboBoxCountry.TabIndex = 4;
             this.comboBoxCountry.ValueMember = "id";
             this.comboBoxCountry.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.comboBoxCountry_DrawItem);
             // 
-            // dataDataSet
-            // 
-            this.dataDataSet.DataSetName = "dataDataSet";
-            this.dataDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
-            // 
             // countryBindingSource
             // 
             this.countryBindingSource.DataMember = "Country";
             this.countryBindingSource.DataSource = this.dataDataSet;
+            // 
+            // dataDataSet
+            // 
+            this.dataDataSet.DataSetName = "dataDataSet";
+            this.dataDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
             // 
             // countryTableAdapter
             // 
@@ -193,8 +191,8 @@
             this.Text = "Футбольный симулятор";
             this.Load += new System.EventHandler(this.FormMain_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewResults)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataDataSet)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.countryBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataDataSet)).EndInit();
             this.ResumeLayout(false);
 
         }

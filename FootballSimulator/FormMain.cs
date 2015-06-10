@@ -22,14 +22,6 @@ namespace FootballSimulator
             typeof(DataGridView).InvokeMember("DoubleBuffered", BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.SetProperty, null, dataGridViewResults, new object[] { true });
         }
 
-        void dataGridViewSpain_SelectionChanged(object sender, EventArgs e)
-        {
-            if (dataGridViewResults.SelectedRows.Count == 1 && dataGridViewResults.SelectedRows[0].Index == 0)
-            {
-                dataGridViewResults.ClearSelection();
-            }
-        }
-
         private void buttonClose_Click(object sender, EventArgs e)
         {
             this.Close();
@@ -80,6 +72,7 @@ namespace FootballSimulator
             DataGridViewRow header = dataGridViewResults.Rows[index];
             header.DefaultCellStyle.Font = new Font("Microsoft San Serif", 8.25f, FontStyle.Bold);
             header.DefaultCellStyle.BackColor = ColorTranslator.FromHtml("#E0E5E5");
+            header.DefaultCellStyle.SelectionBackColor = ColorTranslator.FromHtml("#E0E5E5");
             header.Height = 32;
             header.Cells["Position"].Value = "М";
             header.Cells["Team"].Value = "Команда";

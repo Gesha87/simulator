@@ -26,12 +26,7 @@ namespace FootballSimulator.Classes
 
         private DB()
         {
-            string path = Directory.GetCurrentDirectory();
-            SqlConnectionStringBuilder builder = new SqlConnectionStringBuilder();
-            builder.DataSource = @"(LocalDB)\v11.0";
-            builder.AttachDBFilename = path + @"\data.mdf";
-            builder.IntegratedSecurity = false;
-            connection = new SqlConnection(builder.ConnectionString);
+            connection = new SqlConnection(Properties.Settings.Default.dataConnectionString);
             connection.Open();
         }
 
