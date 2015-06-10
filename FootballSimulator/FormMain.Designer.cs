@@ -36,14 +36,14 @@
             this.buttonClose = new System.Windows.Forms.Button();
             this.buttonReset = new System.Windows.Forms.Button();
             this.buttonSimulate = new System.Windows.Forms.Button();
-            this.dataGridViewSpain = new System.Windows.Forms.DataGridView();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewSpain)).BeginInit();
+            this.dataGridViewResults = new System.Windows.Forms.DataGridView();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewResults)).BeginInit();
             this.SuspendLayout();
             // 
             // buttonClose
             // 
             this.buttonClose.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.buttonClose.Location = new System.Drawing.Point(334, 15);
+            this.buttonClose.Location = new System.Drawing.Point(335, 15);
             this.buttonClose.Margin = new System.Windows.Forms.Padding(8, 6, 8, 6);
             this.buttonClose.Name = "buttonClose";
             this.buttonClose.Size = new System.Drawing.Size(143, 42);
@@ -56,7 +56,7 @@
             // 
             this.buttonReset.BackColor = System.Drawing.Color.Transparent;
             this.buttonReset.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.buttonReset.Location = new System.Drawing.Point(16, 15);
+            this.buttonReset.Location = new System.Drawing.Point(17, 15);
             this.buttonReset.Margin = new System.Windows.Forms.Padding(8, 6, 8, 6);
             this.buttonReset.Name = "buttonReset";
             this.buttonReset.Size = new System.Drawing.Size(143, 42);
@@ -68,7 +68,7 @@
             // buttonSimulate
             // 
             this.buttonSimulate.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.buttonSimulate.Location = new System.Drawing.Point(175, 15);
+            this.buttonSimulate.Location = new System.Drawing.Point(176, 15);
             this.buttonSimulate.Margin = new System.Windows.Forms.Padding(8, 6, 8, 6);
             this.buttonSimulate.Name = "buttonSimulate";
             this.buttonSimulate.Size = new System.Drawing.Size(143, 42);
@@ -77,50 +77,56 @@
             this.buttonSimulate.UseVisualStyleBackColor = true;
             this.buttonSimulate.Click += new System.EventHandler(this.buttonSimulate_Click);
             // 
-            // dataGridViewSpain
+            // dataGridViewResults
             // 
-            this.dataGridViewSpain.AllowUserToAddRows = false;
-            this.dataGridViewSpain.AllowUserToDeleteRows = false;
-            this.dataGridViewSpain.AllowUserToResizeColumns = false;
-            this.dataGridViewSpain.AllowUserToResizeRows = false;
+            this.dataGridViewResults.AllowUserToAddRows = false;
+            this.dataGridViewResults.AllowUserToDeleteRows = false;
+            this.dataGridViewResults.AllowUserToResizeColumns = false;
+            this.dataGridViewResults.AllowUserToResizeRows = false;
             dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.dataGridViewSpain.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
-            this.dataGridViewSpain.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.dataGridViewSpain.CausesValidation = false;
-            this.dataGridViewSpain.ColumnHeadersVisible = false;
+            this.dataGridViewResults.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
+            this.dataGridViewResults.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.dataGridViewResults.CausesValidation = false;
+            this.dataGridViewResults.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
+            this.dataGridViewResults.ColumnHeadersVisible = false;
             dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
             dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
             dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
             dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
             dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dataGridViewSpain.DefaultCellStyle = dataGridViewCellStyle2;
-            this.dataGridViewSpain.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
-            this.dataGridViewSpain.EnableHeadersVisualStyles = false;
-            this.dataGridViewSpain.Location = new System.Drawing.Point(16, 74);
-            this.dataGridViewSpain.Margin = new System.Windows.Forms.Padding(0);
-            this.dataGridViewSpain.MultiSelect = false;
-            this.dataGridViewSpain.Name = "dataGridViewSpain";
-            this.dataGridViewSpain.ReadOnly = true;
+            this.dataGridViewResults.DefaultCellStyle = dataGridViewCellStyle2;
+            this.dataGridViewResults.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter;
+            this.dataGridViewResults.EnableHeadersVisualStyles = false;
+            this.dataGridViewResults.Location = new System.Drawing.Point(17, 74);
+            this.dataGridViewResults.Margin = new System.Windows.Forms.Padding(0);
+            this.dataGridViewResults.MultiSelect = false;
+            this.dataGridViewResults.Name = "dataGridViewResults";
+            this.dataGridViewResults.ReadOnly = true;
             dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control;
             dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText;
             dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.HotTrack;
             dataGridViewCellStyle3.SelectionForeColor = System.Drawing.Color.HotPink;
-            this.dataGridViewSpain.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
-            this.dataGridViewSpain.RowHeadersVisible = false;
+            this.dataGridViewResults.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
+            this.dataGridViewResults.RowHeadersVisible = false;
+            this.dataGridViewResults.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
             dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            dataGridViewCellStyle4.ForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.Color.Moccasin;
+            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.Color.Black;
             dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridViewSpain.RowsDefaultCellStyle = dataGridViewCellStyle4;
-            this.dataGridViewSpain.ScrollBars = System.Windows.Forms.ScrollBars.None;
-            this.dataGridViewSpain.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridViewSpain.ShowCellToolTips = false;
-            this.dataGridViewSpain.Size = new System.Drawing.Size(1158, 705);
-            this.dataGridViewSpain.TabIndex = 3;
-            this.dataGridViewSpain.Visible = false;
-            this.dataGridViewSpain.SelectionChanged += new System.EventHandler(this.dataGridViewSpain_SelectionChanged);
+            this.dataGridViewResults.RowsDefaultCellStyle = dataGridViewCellStyle4;
+            this.dataGridViewResults.ScrollBars = System.Windows.Forms.ScrollBars.None;
+            this.dataGridViewResults.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dataGridViewResults.ShowCellToolTips = false;
+            this.dataGridViewResults.Size = new System.Drawing.Size(1147, 705);
+            this.dataGridViewResults.TabIndex = 3;
+            this.dataGridViewResults.Visible = false;
+            this.dataGridViewResults.CellPainting += new System.Windows.Forms.DataGridViewCellPaintingEventHandler(this.dataGridViewResults_CellPainting);
+            this.dataGridViewResults.SelectionChanged += new System.EventHandler(this.dataGridViewSpain_SelectionChanged);
             // 
             // FormMain
             // 
@@ -130,7 +136,7 @@
             this.BackgroundImage = global::FootballSimulator.Properties.Resources.Background;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.ClientSize = new System.Drawing.Size(1183, 788);
-            this.Controls.Add(this.dataGridViewSpain);
+            this.Controls.Add(this.dataGridViewResults);
             this.Controls.Add(this.buttonSimulate);
             this.Controls.Add(this.buttonReset);
             this.Controls.Add(this.buttonClose);
@@ -146,7 +152,7 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Футбольный симулятор";
             this.Load += new System.EventHandler(this.FormMain_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewSpain)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewResults)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -156,7 +162,7 @@
         private System.Windows.Forms.Button buttonClose;
         private System.Windows.Forms.Button buttonReset;
         private System.Windows.Forms.Button buttonSimulate;
-        private System.Windows.Forms.DataGridView dataGridViewSpain;
+        private System.Windows.Forms.DataGridView dataGridViewResults;
     }
 }
 

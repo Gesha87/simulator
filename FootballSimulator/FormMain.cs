@@ -7,6 +7,7 @@ using System.Data.SqlClient;
 using System.Drawing;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -17,12 +18,16 @@ namespace FootballSimulator
     {
         public FormMain()
         {
-            InitializeComponent(); 
+            InitializeComponent();
+            typeof(DataGridView).InvokeMember("DoubleBuffered", BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.SetProperty, null, dataGridViewResults, new object[] { true });
         }
 
         void dataGridViewSpain_SelectionChanged(object sender, EventArgs e)
         {
-            dataGridViewSpain.ClearSelection();
+            if (dataGridViewResults.SelectedRows.Count == 1 && dataGridViewResults.SelectedRows[0].Index == 0)
+            {
+                dataGridViewResults.ClearSelection();
+            }
         }
 
         private void buttonClose_Click(object sender, EventArgs e)
@@ -32,7 +37,7 @@ namespace FootballSimulator
 
         private void buttonReset_Click(object sender, EventArgs e)
         {
-            dataGridViewSpain.Hide();
+            dataGridViewResults.Hide();
         }
 
         private void buttonSimulate_Click(object sender, EventArgs e)
@@ -40,38 +45,35 @@ namespace FootballSimulator
             List<Team> teams = DB.getInstance().getTeams(1);
             int count = teams.Count;
 
-            dataGridViewSpain.Rows.Clear();
-            dataGridViewSpain.Columns.Clear();
-            dataGridViewSpain.Columns.Add("Position", "М");
-            dataGridViewSpain.Columns["Position"].Width = 32;
-            dataGridViewSpain.Columns.Add("Team", "Команда");
-            dataGridViewSpain.Columns["Team"].Width = 128;
-            dataGridViewSpain.Columns["Team"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewResults.Rows.Clear();
+            dataGridViewResults.Columns.Clear();
+            dataGridViewResults.Columns.Add("Position", "М");
+            dataGridViewResults.Columns["Position"].Width = 32;
+            dataGridViewResults.Columns.Add("Team", "Команда");
+            dataGridViewResults.Columns["Team"].Width = 20;
+            dataGridViewResults.Columns["Team"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft;
             for (int position = 1; position <= teams.Count; position++)
             {
-                DataGridViewHTMLColumn column = new DataGridViewHTMLColumn();
-                column.Name = "Team" + position;
-                column.HeaderText = position.ToString();
-                dataGridViewSpain.Columns.Add("Team" + position, position.ToString());
-                dataGridViewSpain.Columns["Team" + position].Width = 32;
-                dataGridViewSpain.Columns["Team" + position].SortMode = DataGridViewColumnSortMode.NotSortable;
+                dataGridViewResults.Columns.Add("Team" + position, position.ToString());
+                dataGridViewResults.Columns["Team" + position].Width = 32;
             }
-            dataGridViewSpain.Columns.Add("Games", "Иг");
-            dataGridViewSpain.Columns["Games"].Width = 32;
-            dataGridViewSpain.Columns.Add("Won", "В");
-            dataGridViewSpain.Columns["Won"].Width = 32;
-            dataGridViewSpain.Columns.Add("Tied", "Н");
-            dataGridViewSpain.Columns["Tied"].Width = 32;
-            dataGridViewSpain.Columns.Add("Lost", "П");
-            dataGridViewSpain.Columns["Lost"].Width = 32;
-            dataGridViewSpain.Columns.Add("Scores", "Мячи");
-            dataGridViewSpain.Columns["Scores"].Width = 46;
-            dataGridViewSpain.Columns.Add("Diff", "Разн.");
-            dataGridViewSpain.Columns["Diff"].Width = 46;
-            dataGridViewSpain.Columns.Add("Points", "Оч");
-            dataGridViewSpain.Columns["Points"].Width = 32;
-            int index = dataGridViewSpain.Rows.Add();
-            DataGridViewRow header = dataGridViewSpain.Rows[index];
+            dataGridViewResults.Columns.Add("Games", "Иг");
+            dataGridViewResults.Columns["Games"].Width = 32;
+            dataGridViewResults.Columns.Add("Won", "В");
+            dataGridViewResults.Columns["Won"].Width = 32;
+            dataGridViewResults.Columns.Add("Tied", "Н");
+            dataGridViewResults.Columns["Tied"].Width = 32;
+            dataGridViewResults.Columns.Add("Lost", "П");
+            dataGridViewResults.Columns["Lost"].Width = 32;
+            dataGridViewResults.Columns.Add("Scores", "Мячи");
+            dataGridViewResults.Columns["Scores"].Width = 46;
+            dataGridViewResults.Columns.Add("Diff", "Разн.");
+            dataGridViewResults.Columns["Diff"].Width = 46;
+            dataGridViewResults.Columns.Add("Points", "Оч");
+            dataGridViewResults.Columns["Points"].Width = 32;
+            dataGridViewResults.Columns["Team"].Width = 1147 - dataGridViewResults.Columns.GetColumnsWidth(DataGridViewElementStates.None) + 20;
+            int index = dataGridViewResults.Rows.Add();
+            DataGridViewRow header = dataGridViewResults.Rows[index];
             header.DefaultCellStyle.Font = new Font("Microsoft San Serif", 8.25f, FontStyle.Bold);
             header.DefaultCellStyle.BackColor = ColorTranslator.FromHtml("#E0E5E5");
             header.Height = 32;
@@ -89,7 +91,7 @@ namespace FootballSimulator
             header.Cells["Scores"].Value = "Мячи";
             header.Cells["Diff"].Value = "Разн.";
             
-            dataGridViewSpain.Rows.Add(count);
+            dataGridViewResults.Rows.Add(count);
 
             for (int i = 0; i < count; i++)
             {
@@ -170,31 +172,33 @@ namespace FootballSimulator
             for (int i = 1; i <= count; i++)
             {
                 Team home = teams.ElementAt(i-1);
-                dataGridViewSpain.Rows[i].Height = 32;
-                dataGridViewSpain.Rows[i].Cells["Position"].Value = i;
-                dataGridViewSpain.Rows[i].Cells["Team"].Value = home.name;
-                dataGridViewSpain.Rows[i].Cells["Points"].Value = home.points;
-                dataGridViewSpain.Rows[i].Cells["Games"].Value = home.games;
-                dataGridViewSpain.Rows[i].Cells["Won"].Value = home.won;
-                dataGridViewSpain.Rows[i].Cells["Tied"].Value = home.tied;
-                dataGridViewSpain.Rows[i].Cells["Lost"].Value = home.lost;
-                dataGridViewSpain.Rows[i].Cells["Scores"].Value = home.scored + "-" + home.missed;
+                dataGridViewResults.Rows[i].Height = 32;
+                dataGridViewResults.Rows[i].Cells["Position"].Value = i;
+                dataGridViewResults.Rows[i].Cells["Team"].Value = home.name;
+                dataGridViewResults.Rows[i].Cells["Points"].Value = home.points;
+                dataGridViewResults.Rows[i].Cells["Games"].Value = home.games;
+                dataGridViewResults.Rows[i].Cells["Won"].Value = home.won;
+                dataGridViewResults.Rows[i].Cells["Tied"].Value = home.tied;
+                dataGridViewResults.Rows[i].Cells["Lost"].Value = home.lost;
+                dataGridViewResults.Rows[i].Cells["Scores"].Value = home.scored + "-" + home.missed;
                 int diff = home.scored - home.missed;
-                dataGridViewSpain.Rows[i].Cells["Diff"].Value = diff > 0 ? "+" + diff : diff.ToString();
+                dataGridViewResults.Rows[i].Cells["Diff"].Value = diff > 0 ? "+" + diff : diff.ToString();
                 for (int j = 1; j <= count; j++)
                 {
                     if (i == j)
                     {
-                        dataGridViewSpain.Rows[i].Cells["Team" + i].Value = i;
-                        dataGridViewSpain.Rows[i].Cells["Team" + i].Style.BackColor = ColorTranslator.FromHtml("#777");
-                        dataGridViewSpain.Rows[i].Cells["Team" + i].Style.ForeColor = Color.White;
+                        dataGridViewResults.Rows[i].Cells["Team" + i].Value = i;
+                        dataGridViewResults.Rows[i].Cells["Team" + i].Style.BackColor = ColorTranslator.FromHtml("#777");
+                        dataGridViewResults.Rows[i].Cells["Team" + i].Style.SelectionBackColor = ColorTranslator.FromHtml("#777");
+                        dataGridViewResults.Rows[i].Cells["Team" + i].Style.ForeColor = Color.White;
+                        dataGridViewResults.Rows[i].Cells["Team" + i].Style.SelectionForeColor = Color.White;
                         continue;
                     }
                     Team guest = teams.ElementAt(j-1);
                     Match match = home.matches[guest.id];
 
                     string scoreString = match.homeScore + ":" + match.guestScore;
-                    object value = dataGridViewSpain.Rows[i].Cells["Team" + j].Value;
+                    object value = dataGridViewResults.Rows[i].Cells["Team" + j].Value;
                     if (value != null)
                     {
                         value = scoreString + "\n" + value;
@@ -203,10 +207,11 @@ namespace FootballSimulator
                     {
                         value = scoreString;
                     }
-                    dataGridViewSpain.Rows[i].Cells["Team" + j].Value = value;
+                    dataGridViewResults.Rows[i].Cells["Team" + j].Value = value;
+                    dataGridViewResults.Rows[i].Cells["Team" + j].Tag = true;
 
                     scoreString = match.guestScore + ":" + match.homeScore;
-                    value = dataGridViewSpain.Rows[j].Cells["Team" + i].Value;
+                    value = dataGridViewResults.Rows[j].Cells["Team" + i].Value;
                     if (value != null)
                     {
                         value = value + "\n" + scoreString;
@@ -215,18 +220,63 @@ namespace FootballSimulator
                     {
                         value = scoreString;
                     }
-                    dataGridViewSpain.Rows[j].Cells["Team" + i].Value = value;
+                    dataGridViewResults.Rows[j].Cells["Team" + i].Value = value;
                 }
             }
-            dataGridViewSpain.Show();
-            int gridHeight = dataGridViewSpain.Rows.GetRowsHeight(DataGridViewElementStates.None);
-            int gridWidth = dataGridViewSpain.Columns.GetColumnsWidth(DataGridViewElementStates.None);
-            dataGridViewSpain.ClientSize = new Size(gridWidth + 1, gridHeight + 1);
+            dataGridViewResults.Show();
+            int gridHeight = dataGridViewResults.Rows.GetRowsHeight(DataGridViewElementStates.None);
+            int gridWidth = dataGridViewResults.Columns.GetColumnsWidth(DataGridViewElementStates.None);
+            dataGridViewResults.ClientSize = new Size(gridWidth + 1, gridHeight + 1);
         }
 
         private void FormMain_Load(object sender, EventArgs e)
         {
             ScoreManager.getInstance().loadScores();
+        }
+
+        private void dataGridViewResults_CellPainting(object sender, DataGridViewCellPaintingEventArgs e)
+        {
+            DataGridViewCell cell = dataGridViewResults.Rows[e.RowIndex].Cells[e.ColumnIndex];
+            if (cell.Value != null && cell.Tag != null)
+            {
+                if (!e.Handled)
+                {
+                    e.Handled = true;
+                    e.PaintBackground(e.CellBounds, dataGridViewResults.Rows[e.RowIndex].Cells[e.ColumnIndex].Selected);
+                }
+                if ((e.PaintParts & DataGridViewPaintParts.ContentForeground) != DataGridViewPaintParts.None)
+                {
+                    string text = e.Value.ToString();
+                    Rectangle rect = new Rectangle(e.CellBounds.Location, e.CellBounds.Size);
+                    TextFormatFlags flags = TextFormatFlags.VerticalCenter | TextFormatFlags.HorizontalCenter;
+                    string[] cellParts = text.Split(new char[] { '\n' });
+                    if (cellParts.Length == 2)
+                    {
+                        Color color = getColor(cellParts[0], e.CellStyle.ForeColor);
+                        TextRenderer.DrawText(e.Graphics, cellParts[0] + "\n", e.CellStyle.Font, rect, color, flags);
+                        color = getColor(cellParts[1], e.CellStyle.ForeColor);
+                        TextRenderer.DrawText(e.Graphics, "\n" + cellParts[1], e.CellStyle.Font, rect, color, flags);
+                    }
+                }
+            }
+        }
+
+        private Color getColor(string text, Color defaultColor)
+        {
+            string[] scoreParts = text.Split(new char[] { ':' });
+            int first = int.Parse(scoreParts[0]);
+            int second = int.Parse(scoreParts[1]);
+            Color color = defaultColor;
+            if (first > second)
+            {
+                color = Color.Green;
+            }
+            else if (first == second)
+            {
+                color = Color.Blue;
+            }
+
+            return color;
         }
     }
 }
