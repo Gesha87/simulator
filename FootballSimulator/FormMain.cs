@@ -243,7 +243,8 @@ namespace FootballSimulator
                     using (Pen gridLinePen = new Pen(gridBrush))
                     {
                         e.Graphics.FillRectangle(backColorBrush, e.CellBounds);
-                        e.Graphics.DrawRectangle(gridLinePen, e.CellBounds.Left, e.CellBounds.Top, e.CellBounds.Width, e.CellBounds.Height);
+                        e.Graphics.DrawLine(gridLinePen, e.CellBounds.Left, e.CellBounds.Bottom - 1, e.CellBounds.Right - 1, e.CellBounds.Bottom - 1);
+                        e.Graphics.DrawLine(gridLinePen, e.CellBounds.Right - 1, e.CellBounds.Top, e.CellBounds.Right - 1, e.CellBounds.Bottom);
                     }
                 }
             }
