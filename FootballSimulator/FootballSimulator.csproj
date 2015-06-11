@@ -83,6 +83,12 @@
     <Compile Include="Classes\ScoreManager.cs" />
     <Compile Include="Classes\Team.cs" />
     <Compile Include="Classes\Match.cs" />
+    <Compile Include="Classes\TransparentDataGridView.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Classes\TransparentDataGridView.Designer.cs">
+      <DependentUpon>TransparentDataGridView.cs</DependentUpon>
+    </Compile>
     <Compile Include="dataDataSet.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

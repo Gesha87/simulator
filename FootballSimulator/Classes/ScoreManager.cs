@@ -125,7 +125,7 @@ namespace FootballSimulator.Classes
                 double change = -Math.Atan(diff) * 2 / Math.PI;
                 for (int i = 9; i >= 2; i--)
                 {
-                    temp[i] -= (int)Math.Floor(temp[i] * change);
+                    temp[i] -= (int)Math.Round(temp[i] * change);
                 }
             }
             int count = 0;
@@ -170,7 +170,7 @@ namespace FootballSimulator.Classes
                 double change = Math.Atan(diff) * 2 / Math.PI;
                 for (int i = -9; i <= -2; i++)
                 {
-                    temp[i] -= (int)Math.Floor(temp[i] * change);
+                    temp[i] -= (int)Math.Round(temp[i] * change);
                 }
             }
             int count = 0;

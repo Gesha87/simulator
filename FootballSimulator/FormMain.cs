@@ -5,6 +5,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Data.SqlClient;
 using System.Drawing;
+using System.Drawing.Drawing2D;
 using System.IO;
 using System.Linq;
 using System.Reflection;
@@ -47,7 +48,7 @@ namespace FootballSimulator
             dataGridViewResults.Columns.Add("Position", "М");
             dataGridViewResults.Columns["Position"].Width = 32;
             dataGridViewResults.Columns.Add("Team", "Команда");
-            dataGridViewResults.Columns["Team"].Width = 128;
+            dataGridViewResults.Columns["Team"].Width = 138;
             dataGridViewResults.Columns["Team"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft;
             for (int position = 1; position <= teams.Count; position++)
             {
@@ -70,7 +71,6 @@ namespace FootballSimulator
             dataGridViewResults.Columns["Points"].Width = 32;
             int index = dataGridViewResults.Rows.Add();
             DataGridViewRow header = dataGridViewResults.Rows[index];
-            header.DefaultCellStyle.Font = new Font("Microsoft San Serif", 8.25f, FontStyle.Bold);
             header.DefaultCellStyle.BackColor = ColorTranslator.FromHtml("#E0E5E5");
             header.DefaultCellStyle.SelectionBackColor = ColorTranslator.FromHtml("#E0E5E5");
             header.Height = 32;
@@ -236,28 +236,38 @@ namespace FootballSimulator
         private void dataGridViewResults_CellPainting(object sender, DataGridViewCellPaintingEventArgs e)
         {
             DataGridViewCell cell = dataGridViewResults.Rows[e.RowIndex].Cells[e.ColumnIndex];
-            if (cell.Value != null && cell.Tag != null)
+            using (Brush gridBrush = new SolidBrush(dataGridViewResults.GridColor))
             {
-                if (!e.Handled)
+                using (Brush backColorBrush = new SolidBrush(Color.FromArgb(212, cell.Selected ? e.CellStyle.SelectionBackColor : e.CellStyle.BackColor)))
                 {
-                    e.Handled = true;
-                    e.PaintBackground(e.CellBounds, dataGridViewResults.Rows[e.RowIndex].Cells[e.ColumnIndex].Selected);
-                }
-                if ((e.PaintParts & DataGridViewPaintParts.ContentForeground) != DataGridViewPaintParts.None)
-                {
-                    string text = e.Value.ToString();
-                    Rectangle rect = new Rectangle(e.CellBounds.Location, e.CellBounds.Size);
-                    TextFormatFlags flags = TextFormatFlags.VerticalCenter | TextFormatFlags.HorizontalCenter;
-                    string[] cellParts = text.Split(new char[] { '\n' });
-                    if (cellParts.Length == 2)
+                    using (Pen gridLinePen = new Pen(gridBrush))
                     {
-                        Color color = getColor(cellParts[0], e.CellStyle.ForeColor);
-                        TextRenderer.DrawText(e.Graphics, cellParts[0] + "\n", e.CellStyle.Font, rect, color, flags);
-                        color = getColor(cellParts[1], e.CellStyle.ForeColor);
-                        TextRenderer.DrawText(e.Graphics, "\n" + cellParts[1], e.CellStyle.Font, rect, color, flags);
+                        e.Graphics.FillRectangle(backColorBrush, e.CellBounds);
+                        e.Graphics.DrawRectangle(gridLinePen, e.CellBounds.Left, e.CellBounds.Top, e.CellBounds.Width, e.CellBounds.Height);
                     }
                 }
             }
+                    
+            if (cell.Tag == null)
+            {
+                e.PaintContent(e.CellBounds);
+            }
+            else
+            {
+                string text = e.Value.ToString();
+                Rectangle rect = new Rectangle(e.CellBounds.Location, e.CellBounds.Size);
+                TextFormatFlags flags = TextFormatFlags.VerticalCenter | TextFormatFlags.HorizontalCenter;
+                string[] cellParts = text.Split(new char[] { '\n' });
+                if (cellParts.Length == 2)
+                {
+                    Color color = getColor(cellParts[0], e.CellStyle.ForeColor);
+                    TextRenderer.DrawText(e.Graphics, cellParts[0] + "\n", e.CellStyle.Font, rect, color, flags);
+                    color = getColor(cellParts[1], e.CellStyle.ForeColor);
+                    TextRenderer.DrawText(e.Graphics, "\n" + cellParts[1], e.CellStyle.Font, rect, color, flags);
+                }
+            }
+
+            e.Handled = true;
         }
 
         private Color getColor(string text, Color defaultColor)
@@ -282,7 +292,9 @@ namespace FootballSimulator
         {
             e.DrawBackground();
             if (e.State == DrawItemState.Focus)
+            {
                 e.DrawFocusRectangle();
+            }
             var index = e.Index;
             if (index < 0 || index >= comboBoxCountry.Items.Count) return;
             var item = (DataRowView)comboBoxCountry.Items[index];
