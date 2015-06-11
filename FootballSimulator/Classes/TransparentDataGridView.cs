@@ -19,14 +19,10 @@ namespace FootballSimulator.Classes
 
         protected override void PaintBackground(Graphics graphics, Rectangle clipBounds, Rectangle gridBounds)
         {
-            base.PaintBackground(graphics, clipBounds, gridBounds);
-            Rectangle rectSource = new Rectangle(this.Location.X, this.Location.Y, this.Width, this.Height);
+            Rectangle rectSource = new Rectangle(Location.X, Location.Y, Width, Height);
             Rectangle rectDest = new Rectangle(0, 0, rectSource.Width, rectSource.Height);
 
-            Bitmap b = new Bitmap(Parent.ClientRectangle.Width, Parent.ClientRectangle.Height);
-            Graphics.FromImage(b).DrawImage(Parent.BackgroundImage, Parent.ClientRectangle);
-
-            graphics.DrawImage(b, rectDest, rectSource, GraphicsUnit.Pixel);
+            graphics.DrawImage(Parent.BackgroundImage, rectDest, rectSource, GraphicsUnit.Pixel);
         }
     }
 }

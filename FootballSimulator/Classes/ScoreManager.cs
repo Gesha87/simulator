@@ -122,7 +122,7 @@ namespace FootballSimulator.Classes
             }
             if (diff < 0)
             {
-                double change = -Math.Atan(diff) * 2 / Math.PI;
+                double change = -Math.Atan(diff * 1.4) * 2 / Math.PI;
                 for (int i = 9; i >= 2; i--)
                 {
                     temp[i] -= (int)Math.Round(temp[i] * change);
@@ -167,7 +167,7 @@ namespace FootballSimulator.Classes
             }
             if (diff > 0)
             {
-                double change = Math.Atan(diff) * 2 / Math.PI;
+                double change = Math.Atan(diff * 1.4) * 2 / Math.PI;
                 for (int i = -9; i <= -2; i++)
                 {
                     temp[i] -= (int)Math.Round(temp[i] * change);

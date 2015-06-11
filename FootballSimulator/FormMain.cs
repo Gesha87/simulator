@@ -228,7 +228,6 @@ namespace FootballSimulator
 
         private void FormMain_Load(object sender, EventArgs e)
         {
-            // TODO: This line of code loads data into the 'dataDataSet.Country' table. You can move, or remove it, as needed.
             this.countryTableAdapter.Fill(this.dataDataSet.Country);
             ScoreManager.getInstance().loadScores();
         }
@@ -261,9 +260,9 @@ namespace FootballSimulator
                 string[] cellParts = text.Split(new char[] { '\n' });
                 if (cellParts.Length == 2)
                 {
-                    Color color = getColor(cellParts[0], e.CellStyle.ForeColor);
+                    Color color = getTextColor(cellParts[0], e.CellStyle.ForeColor);
                     TextRenderer.DrawText(e.Graphics, cellParts[0] + "\n", e.CellStyle.Font, rect, color, flags);
-                    color = getColor(cellParts[1], e.CellStyle.ForeColor);
+                    color = getTextColor(cellParts[1], e.CellStyle.ForeColor);
                     TextRenderer.DrawText(e.Graphics, "\n" + cellParts[1], e.CellStyle.Font, rect, color, flags);
                 }
             }
@@ -271,7 +270,7 @@ namespace FootballSimulator
             e.Handled = true;
         }
 
-        private Color getColor(string text, Color defaultColor)
+        private Color getTextColor(string text, Color defaultColor)
         {
             string[] scoreParts = text.Split(new char[] { ':' });
             int first = int.Parse(scoreParts[0]);
