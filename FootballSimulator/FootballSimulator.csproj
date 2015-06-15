@@ -79,15 +79,23 @@
   <ItemGroup>
     <Compile Include="Classes\DB.cs" />
     <Compile Include="Classes\RandomGenerator.cs" />
+    <Compile Include="Classes\RoundedRectangle.cs" />
     <Compile Include="Classes\Score.cs" />
     <Compile Include="Classes\ScoreManager.cs" />
+    <Compile Include="Classes\Stats.cs" />
     <Compile Include="Classes\Team.cs" />
     <Compile Include="Classes\Match.cs" />
-    <Compile Include="Classes\TransparentDataGridView.cs">
+    <Compile Include="Controls\TransparentDataGridView.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Classes\TransparentDataGridView.Designer.cs">
+    <Compile Include="Controls\TransparentDataGridView.Designer.cs">
       <DependentUpon>TransparentDataGridView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\TransparentListBox.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Controls\TransparentListBox.Designer.cs">
+      <DependentUpon>TransparentListBox.cs</DependentUpon>
     </Compile>
     <Compile Include="dataDataSet.Designer.cs">
       <AutoGen>True</AutoGen>

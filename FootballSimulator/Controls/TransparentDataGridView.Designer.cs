@@ -1,4 +1,4 @@
-﻿namespace FootballSimulator.Classes
+﻿namespace FootballSimulator.Controls
 {
     partial class TransparentDataGridView
     {

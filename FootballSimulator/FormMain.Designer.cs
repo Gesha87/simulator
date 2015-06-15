@@ -32,17 +32,17 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormMain));
             this.buttonClose = new System.Windows.Forms.Button();
             this.buttonReset = new System.Windows.Forms.Button();
             this.buttonSimulate = new System.Windows.Forms.Button();
-            this.dataGridViewResults = new FootballSimulator.Classes.TransparentDataGridView();
-            this.comboBoxCountry = new System.Windows.Forms.ComboBox();
+            this.dataGridViewResults = new FootballSimulator.Controls.TransparentDataGridView();
             this.countryBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.dataDataSet = new FootballSimulator.dataDataSet();
             this.countryTableAdapter = new FootballSimulator.dataDataSetTableAdapters.CountryTableAdapter();
+            this.labelStats = new System.Windows.Forms.Label();
+            this.checkBoxStats = new System.Windows.Forms.CheckBox();
+            this.listBoxCountry = new FootballSimulator.Controls.TransparentListBox();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewResults)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.countryBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataDataSet)).BeginInit();
@@ -87,50 +87,43 @@
             // 
             // dataGridViewResults
             // 
-            this.dataGridViewResults.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.dataGridViewResults.AllowUserToAddRows = false;
             this.dataGridViewResults.AllowUserToDeleteRows = false;
             this.dataGridViewResults.AllowUserToResizeColumns = false;
             this.dataGridViewResults.AllowUserToResizeRows = false;
-            this.dataGridViewResults.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
             this.dataGridViewResults.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.dataGridViewResults.CausesValidation = false;
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridViewResults.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
             this.dataGridViewResults.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
             this.dataGridViewResults.ColumnHeadersVisible = false;
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dataGridViewResults.DefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dataGridViewResults.DefaultCellStyle = dataGridViewCellStyle1;
             this.dataGridViewResults.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter;
             this.dataGridViewResults.EnableHeadersVisualStyles = false;
-            this.dataGridViewResults.Location = new System.Drawing.Point(17, 74);
+            this.dataGridViewResults.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.dataGridViewResults.Location = new System.Drawing.Point(176, 74);
             this.dataGridViewResults.Margin = new System.Windows.Forms.Padding(0);
             this.dataGridViewResults.MultiSelect = false;
             this.dataGridViewResults.Name = "dataGridViewResults";
             this.dataGridViewResults.ReadOnly = true;
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.HotTrack;
-            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.Color.HotPink;
-            this.dataGridViewResults.RowHeadersDefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.HotTrack;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.Color.HotPink;
+            this.dataGridViewResults.RowHeadersDefaultCellStyle = dataGridViewCellStyle2;
             this.dataGridViewResults.RowHeadersVisible = false;
             this.dataGridViewResults.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
-            dataGridViewCellStyle5.ForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.Color.Moccasin;
-            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridViewResults.RowsDefaultCellStyle = dataGridViewCellStyle5;
+            dataGridViewCellStyle3.ForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.Color.Moccasin;
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridViewResults.RowsDefaultCellStyle = dataGridViewCellStyle3;
             this.dataGridViewResults.ScrollBars = System.Windows.Forms.ScrollBars.None;
             this.dataGridViewResults.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dataGridViewResults.ShowCellToolTips = false;
@@ -138,23 +131,6 @@
             this.dataGridViewResults.TabIndex = 3;
             this.dataGridViewResults.Visible = false;
             this.dataGridViewResults.CellPainting += new System.Windows.Forms.DataGridViewCellPaintingEventHandler(this.dataGridViewResults_CellPainting);
-            // 
-            // comboBoxCountry
-            // 
-            this.comboBoxCountry.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.comboBoxCountry.DataSource = this.countryBindingSource;
-            this.comboBoxCountry.DisplayMember = "name";
-            this.comboBoxCountry.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
-            this.comboBoxCountry.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBoxCountry.FormattingEnabled = true;
-            this.comboBoxCountry.ItemHeight = 33;
-            this.comboBoxCountry.Location = new System.Drawing.Point(335, 16);
-            this.comboBoxCountry.MaxDropDownItems = 5;
-            this.comboBoxCountry.Name = "comboBoxCountry";
-            this.comboBoxCountry.Size = new System.Drawing.Size(251, 39);
-            this.comboBoxCountry.TabIndex = 4;
-            this.comboBoxCountry.ValueMember = "id";
-            this.comboBoxCountry.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.comboBoxCountry_DrawItem);
             // 
             // countryBindingSource
             // 
@@ -170,6 +146,51 @@
             // 
             this.countryTableAdapter.ClearBeforeFill = true;
             // 
+            // labelStats
+            // 
+            this.labelStats.AutoSize = true;
+            this.labelStats.BackColor = System.Drawing.Color.YellowGreen;
+            this.labelStats.Font = new System.Drawing.Font("Courier New", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.labelStats.Location = new System.Drawing.Point(176, 74);
+            this.labelStats.Name = "labelStats";
+            this.labelStats.Padding = new System.Windows.Forms.Padding(10);
+            this.labelStats.Size = new System.Drawing.Size(78, 38);
+            this.labelStats.TabIndex = 6;
+            this.labelStats.Text = "Пусто";
+            this.labelStats.Visible = false;
+            // 
+            // checkBoxStats
+            // 
+            this.checkBoxStats.AutoSize = true;
+            this.checkBoxStats.BackColor = System.Drawing.Color.Transparent;
+            this.checkBoxStats.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.checkBoxStats.Location = new System.Drawing.Point(330, 23);
+            this.checkBoxStats.Name = "checkBoxStats";
+            this.checkBoxStats.Size = new System.Drawing.Size(146, 29);
+            this.checkBoxStats.TabIndex = 7;
+            this.checkBoxStats.Text = "Статистика";
+            this.checkBoxStats.UseVisualStyleBackColor = false;
+            this.checkBoxStats.CheckedChanged += new System.EventHandler(this.checkBoxStats_CheckedChanged);
+            // 
+            // listBoxCountry
+            // 
+            this.listBoxCountry.BackColor = System.Drawing.Color.Transparent;
+            this.listBoxCountry.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.listBoxCountry.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.listBoxCountry.DataSource = this.countryBindingSource;
+            this.listBoxCountry.DisplayMember = "name";
+            this.listBoxCountry.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
+            this.listBoxCountry.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.listBoxCountry.ForeColor = System.Drawing.Color.WhiteSmoke;
+            this.listBoxCountry.FormattingEnabled = true;
+            this.listBoxCountry.ItemHeight = 34;
+            this.listBoxCountry.Location = new System.Drawing.Point(17, 74);
+            this.listBoxCountry.Name = "listBoxCountry";
+            this.listBoxCountry.Size = new System.Drawing.Size(143, 680);
+            this.listBoxCountry.TabIndex = 8;
+            this.listBoxCountry.ValueMember = "id";
+            this.listBoxCountry.SelectedIndexChanged += new System.EventHandler(this.listBoxCountry_SelectedIndexChanged);
+            // 
             // FormMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 25F);
@@ -178,7 +199,9 @@
             this.BackgroundImage = global::FootballSimulator.Properties.Resources.Background;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.ClientSize = new System.Drawing.Size(1183, 788);
-            this.Controls.Add(this.comboBoxCountry);
+            this.Controls.Add(this.listBoxCountry);
+            this.Controls.Add(this.checkBoxStats);
+            this.Controls.Add(this.labelStats);
             this.Controls.Add(this.dataGridViewResults);
             this.Controls.Add(this.buttonSimulate);
             this.Controls.Add(this.buttonReset);
@@ -190,7 +213,6 @@
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Margin = new System.Windows.Forms.Padding(8, 6, 8, 6);
             this.MaximizeBox = false;
-            this.MinimizeBox = false;
             this.Name = "FormMain";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Футбольный симулятор";
@@ -199,6 +221,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.countryBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataDataSet)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -207,11 +230,13 @@
         private System.Windows.Forms.Button buttonClose;
         private System.Windows.Forms.Button buttonReset;
         private System.Windows.Forms.Button buttonSimulate;
-        private FootballSimulator.Classes.TransparentDataGridView dataGridViewResults;
-        private System.Windows.Forms.ComboBox comboBoxCountry;
+        private FootballSimulator.Controls.TransparentDataGridView dataGridViewResults;
         private dataDataSet dataDataSet;
         private System.Windows.Forms.BindingSource countryBindingSource;
         private dataDataSetTableAdapters.CountryTableAdapter countryTableAdapter;
+        private System.Windows.Forms.Label labelStats;
+        private System.Windows.Forms.CheckBox checkBoxStats;
+        private FootballSimulator.Controls.TransparentListBox listBoxCountry;
     }
 }
 

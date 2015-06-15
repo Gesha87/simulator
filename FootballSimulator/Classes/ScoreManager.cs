@@ -76,7 +76,7 @@ namespace FootballSimulator.Classes
             double change = Math.Atan(diff) * 2 / Math.PI;
             if (diff < 0)
             {
-                localChanceDraw += change * (chanceDraw - chanceWinHome * (1 + change));
+                localChanceDraw += change * (chanceDraw - chanceWinHome * (1 + change * 0.4));
                 localChanceWinHome += change * chanceWinHome;
             }
             else
@@ -87,17 +87,21 @@ namespace FootballSimulator.Classes
                 localChanceWinHome = 1 - localChanceDraw - localChanceWinGuest;
             }
 
+            Stats.getInstance().count += 1;
             if (val < localChanceWinHome)
             {
                 outcome = 1;
+                Stats.getInstance().homeWin += 1;
             }
             else if (val < localChanceWinHome + localChanceDraw)
             {
                 outcome = 0;
+                Stats.getInstance().draw += 1;
             }
             else
             {
                 outcome = -1;
+                Stats.getInstance().guestWin += 1;
             }
 
             return outcome;
@@ -122,7 +126,7 @@ namespace FootballSimulator.Classes
             }
             if (diff < 0)
             {
-                double change = -Math.Atan(diff * 1.4) * 2 / Math.PI;
+                double change = -Math.Atan(diff * 2) * 2 / Math.PI;
                 for (int i = 9; i >= 2; i--)
                 {
                     temp[i] -= (int)Math.Round(temp[i] * change);
@@ -167,7 +171,7 @@ namespace FootballSimulator.Classes
             }
             if (diff > 0)
             {
-                double change = Math.Atan(diff * 1.4) * 2 / Math.PI;
+                double change = Math.Atan(diff * 2) * 2 / Math.PI;
                 for (int i = -9; i <= -2; i++)
                 {
                     temp[i] -= (int)Math.Round(temp[i] * change);
@@ -202,6 +206,7 @@ namespace FootballSimulator.Classes
                 cur += score.count;
                 if (val <= cur)
                 {
+                    Stats.getInstance().scores[score.home + ":" + score.guest] += 1;
                     return score;
                 }
             }

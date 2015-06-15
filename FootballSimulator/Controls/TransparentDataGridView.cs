@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace FootballSimulator.Classes
+namespace FootballSimulator.Controls
 {
     public partial class TransparentDataGridView : DataGridView
     {
