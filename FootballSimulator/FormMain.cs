@@ -319,5 +319,10 @@ namespace FootballSimulator
                 labelStats.Text += key + ":" + string.Format("{0,5}({1,7:P3})", stats.scores[key], (double)stats.scores[key] / stats.count) + (k % 3 == 0 ? "\n" : " ");
             }
         }
+
+        private void FormMain_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            listBoxCountry.SelectedIndexChanged -= listBoxCountry_SelectedIndexChanged;
+        }
     }
 }
