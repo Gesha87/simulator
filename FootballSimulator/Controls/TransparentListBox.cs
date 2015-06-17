@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using System.Drawing.Drawing2D;
 using FootballSimulator.Classes;
 using System.Drawing.Imaging;
+using FootballSimulator.Properties;
 
 namespace FootballSimulator.Controls
 {
@@ -72,7 +73,7 @@ namespace FootballSimulator.Controls
                 e.Graphics.FillPath(brush, path);
                 Rectangle flagRect = new Rectangle(rect.X, rect.Y, 28, rect.Height);
                 DataRow dataRow = ((DataRowView)(Items[i])).Row;
-                Bitmap flag = (Bitmap)FootballSimulator.Properties.Resources.ResourceManager.GetObject(dataRow["flag"].ToString());
+                Bitmap flag = (Bitmap)Resources.ResourceManager.GetObject(dataRow["flag"].ToString());
                 e.Graphics.DrawImage(flag, flagRect.X + (flagRect.Width - flag.Width) / 2, flagRect.Y + (flagRect.Height - flag.Height) / 2, flag.Width, flag.Height);
                 Rectangle nameRect = new Rectangle(rect.X + 24, rect.Y, rect.Width - 42, rect.Height);
                 e.Graphics.DrawString(GetItemText(Items[i]), Font, new SolidBrush(ForeColor), nameRect, strFmt);
