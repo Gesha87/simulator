@@ -61,7 +61,7 @@
     <GenerateManifests>true</GenerateManifests>
   </PropertyGroup>
   <PropertyGroup>
-    <SignManifests>true</SignManifests>
+    <SignManifests>false</SignManifests>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -157,6 +157,13 @@
       <DependentUpon>data.mdf</DependentUpon>
     </Content>
     <Content Include="FootballSimulator.ico" />
+    <None Include="Resources\ru.png" />
+    <None Include="Resources\pt.png" />
+    <None Include="Resources\it.png" />
+    <None Include="Resources\fr.png" />
+    <None Include="Resources\es.png" />
+    <None Include="Resources\en.png" />
+    <None Include="Resources\de.png" />
     <None Include="Resources\12345.jpg" />
   </ItemGroup>
   <ItemGroup>

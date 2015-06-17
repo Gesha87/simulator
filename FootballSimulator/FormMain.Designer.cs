@@ -106,7 +106,7 @@
             this.dataGridViewResults.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter;
             this.dataGridViewResults.EnableHeadersVisualStyles = false;
             this.dataGridViewResults.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.dataGridViewResults.Location = new System.Drawing.Point(176, 74);
+            this.dataGridViewResults.Location = new System.Drawing.Point(215, 74);
             this.dataGridViewResults.Margin = new System.Windows.Forms.Padding(0);
             this.dataGridViewResults.MultiSelect = false;
             this.dataGridViewResults.Name = "dataGridViewResults";
@@ -127,7 +127,7 @@
             this.dataGridViewResults.ScrollBars = System.Windows.Forms.ScrollBars.None;
             this.dataGridViewResults.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dataGridViewResults.ShowCellToolTips = false;
-            this.dataGridViewResults.Size = new System.Drawing.Size(335, 197);
+            this.dataGridViewResults.Size = new System.Drawing.Size(378, 255);
             this.dataGridViewResults.TabIndex = 3;
             this.dataGridViewResults.Visible = false;
             this.dataGridViewResults.CellPainting += new System.Windows.Forms.DataGridViewCellPaintingEventHandler(this.dataGridViewResults_CellPainting);
@@ -151,7 +151,7 @@
             this.labelStats.AutoSize = true;
             this.labelStats.BackColor = System.Drawing.Color.YellowGreen;
             this.labelStats.Font = new System.Drawing.Font("Courier New", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.labelStats.Location = new System.Drawing.Point(176, 74);
+            this.labelStats.Location = new System.Drawing.Point(215, 74);
             this.labelStats.Name = "labelStats";
             this.labelStats.Padding = new System.Windows.Forms.Padding(10);
             this.labelStats.Size = new System.Drawing.Size(78, 38);
@@ -186,7 +186,7 @@
             this.listBoxCountry.ItemHeight = 34;
             this.listBoxCountry.Location = new System.Drawing.Point(17, 74);
             this.listBoxCountry.Name = "listBoxCountry";
-            this.listBoxCountry.Size = new System.Drawing.Size(143, 680);
+            this.listBoxCountry.Size = new System.Drawing.Size(180, 680);
             this.listBoxCountry.TabIndex = 8;
             this.listBoxCountry.ValueMember = "id";
             this.listBoxCountry.SelectedIndexChanged += new System.EventHandler(this.listBoxCountry_SelectedIndexChanged);
@@ -197,7 +197,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.YellowGreen;
             this.BackgroundImage = global::FootballSimulator.Properties.Resources.Background;
-            this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.ClientSize = new System.Drawing.Size(1183, 788);
             this.Controls.Add(this.listBoxCountry);
             this.Controls.Add(this.checkBoxStats);

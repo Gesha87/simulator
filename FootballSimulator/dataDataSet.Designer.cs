@@ -285,6 +285,8 @@ namespace FootballSimulator {
             
             private global::System.Data.DataColumn columnrating;
             
+            private global::System.Data.DataColumn columnflag;
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public CountryDataTable() {
@@ -344,6 +346,14 @@ namespace FootballSimulator {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn flagColumn {
+                get {
+                    return this.columnflag;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             [global::System.ComponentModel.Browsable(false)]
             public int Count {
                 get {
@@ -379,12 +389,13 @@ namespace FootballSimulator {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public CountryRow AddCountryRow(int id, string name, double rating) {
+            public CountryRow AddCountryRow(int id, string name, double rating, string flag) {
                 CountryRow rowCountryRow = ((CountryRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         id,
                         name,
-                        rating};
+                        rating,
+                        flag};
                 rowCountryRow.ItemArray = columnValuesArray;
                 this.Rows.Add(rowCountryRow);
                 return rowCountryRow;
@@ -417,6 +428,7 @@ namespace FootballSimulator {
                 this.columnid = base.Columns["id"];
                 this.columnname = base.Columns["name"];
                 this.columnrating = base.Columns["rating"];
+                this.columnflag = base.Columns["flag"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -428,6 +440,8 @@ namespace FootballSimulator {
                 base.Columns.Add(this.columnname);
                 this.columnrating = new global::System.Data.DataColumn("rating", typeof(double), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnrating);
+                this.columnflag = new global::System.Data.DataColumn("flag", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnflag);
                 this.Constraints.Add(new global::System.Data.UniqueConstraint("Constraint1", new global::System.Data.DataColumn[] {
                                 this.columnid}, true));
                 this.columnid.AllowDBNull = false;
@@ -435,6 +449,7 @@ namespace FootballSimulator {
                 this.columnname.AllowDBNull = false;
                 this.columnname.MaxLength = 128;
                 this.columnrating.AllowDBNull = false;
+                this.columnflag.MaxLength = 2;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -607,6 +622,34 @@ namespace FootballSimulator {
                     this[this.tableCountry.ratingColumn] = value;
                 }
             }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public string flag {
+                get {
+                    try {
+                        return ((string)(this[this.tableCountry.flagColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'flag\' in table \'Country\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableCountry.flagColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IsflagNull() {
+                return this.IsNull(this.tableCountry.flagColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetflagNull() {
+                this[this.tableCountry.flagColumn] = global::System.Convert.DBNull;
+            }
         }
         
         /// <summary>
@@ -771,35 +814,42 @@ namespace FootballSimulator.dataDataSetTableAdapters {
             tableMapping.ColumnMappings.Add("id", "id");
             tableMapping.ColumnMappings.Add("name", "name");
             tableMapping.ColumnMappings.Add("rating", "rating");
+            tableMapping.ColumnMappings.Add("flag", "flag");
             this._adapter.TableMappings.Add(tableMapping);
             this._adapter.DeleteCommand = new global::System.Data.SqlClient.SqlCommand();
             this._adapter.DeleteCommand.Connection = this.Connection;
             this._adapter.DeleteCommand.CommandText = "DELETE FROM [dbo].[Country] WHERE (([id] = @Original_id) AND ([name] = @Original_" +
-                "name) AND ([rating] = @Original_rating))";
+                "name) AND ([rating] = @Original_rating) AND ((@IsNull_flag = 1 AND [flag] IS NUL" +
+                "L) OR ([flag] = @Original_flag)))";
             this._adapter.DeleteCommand.CommandType = global::System.Data.CommandType.Text;
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "id", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_name", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "name", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_rating", global::System.Data.SqlDbType.Float, 0, global::System.Data.ParameterDirection.Input, 0, 0, "rating", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_flag", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "flag", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
+            this._adapter.DeleteCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_flag", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "flag", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.InsertCommand = new global::System.Data.SqlClient.SqlCommand();
             this._adapter.InsertCommand.Connection = this.Connection;
-            this._adapter.InsertCommand.CommandText = "INSERT INTO [dbo].[Country] ([id], [name], [rating]) VALUES (@id, @name, @rating)" +
-                ";\r\nSELECT id, name, rating FROM Country WHERE (id = @id)";
+            this._adapter.InsertCommand.CommandText = "INSERT INTO [dbo].[Country] ([id], [name], [rating], [flag]) VALUES (@id, @name, " +
+                "@rating, @flag);\r\nSELECT id, name, rating, flag FROM Country WHERE (id = @id)";
             this._adapter.InsertCommand.CommandType = global::System.Data.CommandType.Text;
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "id", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@name", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "name", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@rating", global::System.Data.SqlDbType.Float, 0, global::System.Data.ParameterDirection.Input, 0, 0, "rating", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.InsertCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@flag", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "flag", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand = new global::System.Data.SqlClient.SqlCommand();
             this._adapter.UpdateCommand.Connection = this.Connection;
-            this._adapter.UpdateCommand.CommandText = "UPDATE [dbo].[Country] SET [id] = @id, [name] = @name, [rating] = @rating WHERE (" +
-                "([id] = @Original_id) AND ([name] = @Original_name) AND ([rating] = @Original_ra" +
-                "ting));\r\nSELECT id, name, rating FROM Country WHERE (id = @id)";
+            this._adapter.UpdateCommand.CommandText = @"UPDATE [dbo].[Country] SET [id] = @id, [name] = @name, [rating] = @rating, [flag] = @flag WHERE (([id] = @Original_id) AND ([name] = @Original_name) AND ([rating] = @Original_rating) AND ((@IsNull_flag = 1 AND [flag] IS NULL) OR ([flag] = @Original_flag)));
+SELECT id, name, rating, flag FROM Country WHERE (id = @id)";
             this._adapter.UpdateCommand.CommandType = global::System.Data.CommandType.Text;
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "id", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@name", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "name", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@rating", global::System.Data.SqlDbType.Float, 0, global::System.Data.ParameterDirection.Input, 0, 0, "rating", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@flag", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "flag", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_id", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "id", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_name", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "name", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
             this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_rating", global::System.Data.SqlDbType.Float, 0, global::System.Data.ParameterDirection.Input, 0, 0, "rating", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@IsNull_flag", global::System.Data.SqlDbType.Int, 0, global::System.Data.ParameterDirection.Input, 0, 0, "flag", global::System.Data.DataRowVersion.Original, true, null, "", "", ""));
+            this._adapter.UpdateCommand.Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Original_flag", global::System.Data.SqlDbType.NVarChar, 0, global::System.Data.ParameterDirection.Input, 0, 0, "flag", global::System.Data.DataRowVersion.Original, false, null, "", "", ""));
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -815,7 +865,7 @@ namespace FootballSimulator.dataDataSetTableAdapters {
             this._commandCollection = new global::System.Data.SqlClient.SqlCommand[1];
             this._commandCollection[0] = new global::System.Data.SqlClient.SqlCommand();
             this._commandCollection[0].Connection = this.Connection;
-            this._commandCollection[0].CommandText = "SELECT id, name, rating FROM dbo.Country";
+            this._commandCollection[0].CommandText = "SELECT id, name, rating, flag FROM dbo.Country";
             this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
         }
         
@@ -876,7 +926,7 @@ namespace FootballSimulator.dataDataSetTableAdapters {
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Delete, true)]
-        public virtual int Delete(int Original_id, string Original_name, double Original_rating) {
+        public virtual int Delete(int Original_id, string Original_name, double Original_rating, string Original_flag) {
             this.Adapter.DeleteCommand.Parameters[0].Value = ((int)(Original_id));
             if ((Original_name == null)) {
                 throw new global::System.ArgumentNullException("Original_name");
@@ -885,6 +935,14 @@ namespace FootballSimulator.dataDataSetTableAdapters {
                 this.Adapter.DeleteCommand.Parameters[1].Value = ((string)(Original_name));
             }
             this.Adapter.DeleteCommand.Parameters[2].Value = ((double)(Original_rating));
+            if ((Original_flag == null)) {
+                this.Adapter.DeleteCommand.Parameters[3].Value = ((object)(1));
+                this.Adapter.DeleteCommand.Parameters[4].Value = global::System.DBNull.Value;
+            }
+            else {
+                this.Adapter.DeleteCommand.Parameters[3].Value = ((object)(0));
+                this.Adapter.DeleteCommand.Parameters[4].Value = ((string)(Original_flag));
+            }
             global::System.Data.ConnectionState previousConnectionState = this.Adapter.DeleteCommand.Connection.State;
             if (((this.Adapter.DeleteCommand.Connection.State & global::System.Data.ConnectionState.Open) 
                         != global::System.Data.ConnectionState.Open)) {
@@ -905,7 +963,7 @@ namespace FootballSimulator.dataDataSetTableAdapters {
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Insert, true)]
-        public virtual int Insert(int id, string name, double rating) {
+        public virtual int Insert(int id, string name, double rating, string flag) {
             this.Adapter.InsertCommand.Parameters[0].Value = ((int)(id));
             if ((name == null)) {
                 throw new global::System.ArgumentNullException("name");
@@ -914,6 +972,12 @@ namespace FootballSimulator.dataDataSetTableAdapters {
                 this.Adapter.InsertCommand.Parameters[1].Value = ((string)(name));
             }
             this.Adapter.InsertCommand.Parameters[2].Value = ((double)(rating));
+            if ((flag == null)) {
+                this.Adapter.InsertCommand.Parameters[3].Value = global::System.DBNull.Value;
+            }
+            else {
+                this.Adapter.InsertCommand.Parameters[3].Value = ((string)(flag));
+            }
             global::System.Data.ConnectionState previousConnectionState = this.Adapter.InsertCommand.Connection.State;
             if (((this.Adapter.InsertCommand.Connection.State & global::System.Data.ConnectionState.Open) 
                         != global::System.Data.ConnectionState.Open)) {
@@ -934,7 +998,7 @@ namespace FootballSimulator.dataDataSetTableAdapters {
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, true)]
-        public virtual int Update(int id, string name, double rating, int Original_id, string Original_name, double Original_rating) {
+        public virtual int Update(int id, string name, double rating, string flag, int Original_id, string Original_name, double Original_rating, string Original_flag) {
             this.Adapter.UpdateCommand.Parameters[0].Value = ((int)(id));
             if ((name == null)) {
                 throw new global::System.ArgumentNullException("name");
@@ -943,14 +1007,28 @@ namespace FootballSimulator.dataDataSetTableAdapters {
                 this.Adapter.UpdateCommand.Parameters[1].Value = ((string)(name));
             }
             this.Adapter.UpdateCommand.Parameters[2].Value = ((double)(rating));
-            this.Adapter.UpdateCommand.Parameters[3].Value = ((int)(Original_id));
+            if ((flag == null)) {
+                this.Adapter.UpdateCommand.Parameters[3].Value = global::System.DBNull.Value;
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[3].Value = ((string)(flag));
+            }
+            this.Adapter.UpdateCommand.Parameters[4].Value = ((int)(Original_id));
             if ((Original_name == null)) {
                 throw new global::System.ArgumentNullException("Original_name");
             }
             else {
-                this.Adapter.UpdateCommand.Parameters[4].Value = ((string)(Original_name));
+                this.Adapter.UpdateCommand.Parameters[5].Value = ((string)(Original_name));
             }
-            this.Adapter.UpdateCommand.Parameters[5].Value = ((double)(Original_rating));
+            this.Adapter.UpdateCommand.Parameters[6].Value = ((double)(Original_rating));
+            if ((Original_flag == null)) {
+                this.Adapter.UpdateCommand.Parameters[7].Value = ((object)(1));
+                this.Adapter.UpdateCommand.Parameters[8].Value = global::System.DBNull.Value;
+            }
+            else {
+                this.Adapter.UpdateCommand.Parameters[7].Value = ((object)(0));
+                this.Adapter.UpdateCommand.Parameters[8].Value = ((string)(Original_flag));
+            }
             global::System.Data.ConnectionState previousConnectionState = this.Adapter.UpdateCommand.Connection.State;
             if (((this.Adapter.UpdateCommand.Connection.State & global::System.Data.ConnectionState.Open) 
                         != global::System.Data.ConnectionState.Open)) {
@@ -971,8 +1049,8 @@ namespace FootballSimulator.dataDataSetTableAdapters {
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Update, true)]
-        public virtual int Update(string name, double rating, int Original_id, string Original_name, double Original_rating) {
-            return this.Update(Original_id, name, rating, Original_id, Original_name, Original_rating);
+        public virtual int Update(string name, double rating, string flag, int Original_id, string Original_name, double Original_rating, string Original_flag) {
+            return this.Update(Original_id, name, rating, flag, Original_id, Original_name, Original_rating, Original_flag);
         }
     }
     

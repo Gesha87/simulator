@@ -58,9 +58,36 @@ namespace FootballSimulator
                 {
                     using (Pen gridLinePen = new Pen(gridBrush))
                     {
-                        e.Graphics.FillRectangle(backColorBrush, e.CellBounds);
-                        e.Graphics.DrawLine(gridLinePen, e.CellBounds.Left, e.CellBounds.Bottom - 1, e.CellBounds.Right - 1, e.CellBounds.Bottom - 1);
-                        e.Graphics.DrawLine(gridLinePen, e.CellBounds.Right - 1, e.CellBounds.Top, e.CellBounds.Right - 1, e.CellBounds.Bottom);
+                        if (e.RowIndex == 0 && e.ColumnIndex == 0)
+                        {
+                            e.Graphics.SmoothingMode = SmoothingMode.HighQuality;
+                            GraphicsPath path = RoundedRectangle.Create(e.CellBounds, 5, RoundedRectangle.RectangleCorners.TopLeft);
+                            e.Graphics.FillPath(backColorBrush, path);
+                        }
+                        else if (e.RowIndex == 0 && e.ColumnIndex == dataGridViewResults.ColumnCount - 1)
+                        {
+                            e.Graphics.SmoothingMode = SmoothingMode.HighQuality;
+                            GraphicsPath path = RoundedRectangle.Create(e.CellBounds, 5, RoundedRectangle.RectangleCorners.TopRight);
+                            e.Graphics.FillPath(backColorBrush, path);
+                        }
+                        else if (e.RowIndex == dataGridViewResults.RowCount - 1 && e.ColumnIndex == 0)
+                        {
+                            e.Graphics.SmoothingMode = SmoothingMode.HighQuality;
+                            GraphicsPath path = RoundedRectangle.Create(e.CellBounds, 5, RoundedRectangle.RectangleCorners.BottomLeft);
+                            e.Graphics.FillPath(backColorBrush, path);
+                        }
+                        else if (e.RowIndex == dataGridViewResults.RowCount - 1 && e.ColumnIndex == dataGridViewResults.ColumnCount - 1)
+                        {
+                            e.Graphics.SmoothingMode = SmoothingMode.HighQuality;
+                            GraphicsPath path = RoundedRectangle.Create(e.CellBounds, 5, RoundedRectangle.RectangleCorners.BottomRight);
+                            e.Graphics.FillPath(backColorBrush, path);
+                        }
+                        else
+                        {
+                            e.Graphics.FillRectangle(backColorBrush, e.CellBounds);
+                        }
+                        e.Graphics.DrawLine(gridLinePen, e.CellBounds.Left, e.CellBounds.Bottom, e.CellBounds.Right, e.CellBounds.Bottom);
+                        e.Graphics.DrawLine(gridLinePen, e.CellBounds.Right, e.CellBounds.Top, e.CellBounds.Right, e.CellBounds.Bottom);
                     }
                 }
             }
@@ -130,12 +157,12 @@ namespace FootballSimulator
             dataGridViewResults.Columns.Add("Position", "М");
             dataGridViewResults.Columns["Position"].Width = 32;
             dataGridViewResults.Columns.Add("Team", "Команда");
-            dataGridViewResults.Columns["Team"].Width = 122;
+            dataGridViewResults.Columns["Team"].Width = 118;
             dataGridViewResults.Columns["Team"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft;
             for (int position = 1; position <= teams.Count; position++)
             {
                 dataGridViewResults.Columns.Add("Team" + position, position.ToString());
-                dataGridViewResults.Columns["Team" + position].Width = 30;
+                dataGridViewResults.Columns["Team" + position].Width = 27;
             }
             dataGridViewResults.Columns.Add("Games", "Иг");
             dataGridViewResults.Columns["Games"].Width = 30;
@@ -155,7 +182,7 @@ namespace FootballSimulator
             DataGridViewRow header = dataGridViewResults.Rows[index];
             header.DefaultCellStyle.BackColor = ColorTranslator.FromHtml("#E0E5E5");
             header.DefaultCellStyle.SelectionBackColor = ColorTranslator.FromHtml("#E0E5E5");
-            header.Height = 30;
+            header.Height = 27;
             header.Cells["Position"].Value = "М";
             header.Cells["Team"].Value = "Команда";
             for (int position = 1; position <= teams.Count; position++)
@@ -251,7 +278,7 @@ namespace FootballSimulator
             for (int i = 1; i <= count; i++)
             {
                 Team home = teams.ElementAt(i - 1);
-                dataGridViewResults.Rows[i].Height = 30;
+                dataGridViewResults.Rows[i].Height = 27;
                 dataGridViewResults.Rows[i].Cells["Position"].Value = i;
                 dataGridViewResults.Rows[i].Cells["Team"].Value = home.name;
                 dataGridViewResults.Rows[i].Cells["Points"].Value = home.points;

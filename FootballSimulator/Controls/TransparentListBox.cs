@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Drawing.Drawing2D;
 using FootballSimulator.Classes;
+using System.Drawing.Imaging;
 
 namespace FootballSimulator.Controls
 {
@@ -49,20 +50,12 @@ namespace FootballSimulator.Controls
 
         protected override void OnPaint(PaintEventArgs e)
         {
-            e.Graphics.CompositingQuality = CompositingQuality.HighQuality;
-            e.Graphics.InterpolationMode = InterpolationMode.HighQualityBilinear;
             e.Graphics.SmoothingMode = SmoothingMode.HighQuality;
-            e.Graphics.TextRenderingHint = System.Drawing.Text.TextRenderingHint.ClearTypeGridFit;
             for (int i = 0; i < Items.Count; i++)
             {
                 StringFormat strFmt = new System.Drawing.StringFormat();
                 strFmt.LineAlignment = StringAlignment.Center;
                 Rectangle rect = GetItemRectangle(i);
-                if (i == SelectedIndex)
-                {
-                    //rect.X += 4;
-                    //rect.Y += 2;
-                }
                 LinearGradientBrush brush = new LinearGradientBrush(new Point(rect.X, rect.Y), new Point(rect.X + rect.Width, rect.Y + rect.Width), Color.FromArgb(255, 136, 162, 99), Color.FromArgb(0, 136, 162, 99));
                 float[] relativeIntensities = { 0.0f, 1.0f, 1.0f };
                 float[] relativePositions = { 0.0f, 0.5f, 1.0f };
@@ -75,9 +68,14 @@ namespace FootballSimulator.Controls
                 blend.Factors = relativeIntensities;
                 blend.Positions = relativePositions;
                 brush.Blend = blend;
-                GraphicsPath path = RoundedRectangle.Create(rect.X + 1, rect.Y + 1, rect.Width - 2, rect.Height - 2, 7);
+                GraphicsPath path = RoundedRectangle.Create(rect.X + 1, rect.Y + 1, rect.Width - 2, rect.Height - 2, 5);
                 e.Graphics.FillPath(brush, path);
-                e.Graphics.DrawString(GetItemText(Items[i]), Font, new SolidBrush(ForeColor), rect, strFmt);
+                Rectangle flagRect = new Rectangle(rect.X, rect.Y, 28, rect.Height);
+                DataRow dataRow = ((DataRowView)(Items[i])).Row;
+                Bitmap flag = (Bitmap)FootballSimulator.Properties.Resources.ResourceManager.GetObject(dataRow["flag"].ToString());
+                e.Graphics.DrawImage(flag, flagRect.X + (flagRect.Width - flag.Width) / 2, flagRect.Y + (flagRect.Height - flag.Height) / 2, flag.Width, flag.Height);
+                Rectangle nameRect = new Rectangle(rect.X + 24, rect.Y, rect.Width - 42, rect.Height);
+                e.Graphics.DrawString(GetItemText(Items[i]), Font, new SolidBrush(ForeColor), nameRect, strFmt);
                 if (i == hoveredIndex)
                 {
                     path = RoundedRectangle.Create(rect.X + 1, rect.Y + 1, rect.Width - 2, rect.Height - 2, 7);
@@ -85,9 +83,8 @@ namespace FootballSimulator.Controls
                 }
                 if (i == SelectedIndex || i == hoveredIndex)
                 {
-                    rect.X = rect.X + rect.Width - 22;
-                    rect.Width = 22;
-                    e.Graphics.DrawString(">", Font, new SolidBrush(ForeColor), rect, strFmt);
+                    Rectangle arrowRect = new Rectangle(rect.X + rect.Width - 22, rect.Y, 22, rect.Height);
+                    e.Graphics.DrawString(">", Font, new SolidBrush(ForeColor), arrowRect, strFmt);
                 }
             }
 
