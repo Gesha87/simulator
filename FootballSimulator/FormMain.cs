@@ -59,37 +59,38 @@ namespace FootballSimulator
                 {
                     using (Pen gridLinePen = new Pen(gridBrush))
                     {
+                        Rectangle border = e.CellBounds;
+                        border.X -= 1;
+                        border.Y -= 1;
                         if (e.RowIndex == 0 && e.ColumnIndex == 0)
                         {
-                            GraphicsPath path = RoundedRectangle.Create(e.CellBounds, 5, RoundedRectangle.RectangleCorners.TopLeft);
+                            GraphicsPath path = RoundedRectangle.Create(border, 5, RoundedRectangle.RectangleCorners.TopLeft);
                             e.Graphics.FillPath(backColorBrush, path);
                             e.Graphics.DrawPath(gridLinePen, path);
                         }
                         else if (e.RowIndex == 0 && e.ColumnIndex == dataGridViewResults.ColumnCount - 1)
                         {
-                            GraphicsPath path = RoundedRectangle.Create(e.CellBounds, 5, RoundedRectangle.RectangleCorners.TopRight);
+                            GraphicsPath path = RoundedRectangle.Create(border, 5, RoundedRectangle.RectangleCorners.TopRight);
                             e.Graphics.FillPath(backColorBrush, path);
                             e.Graphics.DrawPath(gridLinePen, path);
                         }
                         else if (e.RowIndex == dataGridViewResults.RowCount - 1 && e.ColumnIndex == 0)
                         {
-                            GraphicsPath path = RoundedRectangle.Create(e.CellBounds, 5, RoundedRectangle.RectangleCorners.BottomLeft);
+                            GraphicsPath path = RoundedRectangle.Create(border, 5, RoundedRectangle.RectangleCorners.BottomLeft);
                             e.Graphics.FillPath(backColorBrush, path);
                             e.Graphics.DrawPath(gridLinePen, path);
                         }
                         else if (e.RowIndex == dataGridViewResults.RowCount - 1 && e.ColumnIndex == dataGridViewResults.ColumnCount - 1)
                         {
-                            GraphicsPath path = RoundedRectangle.Create(e.CellBounds, 5, RoundedRectangle.RectangleCorners.BottomRight);
+                            GraphicsPath path = RoundedRectangle.Create(border, 5, RoundedRectangle.RectangleCorners.BottomRight);
                             e.Graphics.FillPath(backColorBrush, path);
                             e.Graphics.DrawPath(gridLinePen, path);
                         }
                         else
                         {
-                            e.Graphics.FillRectangle(backColorBrush, e.CellBounds);
-                            e.Graphics.DrawRectangle(gridLinePen, e.CellBounds);
+                            e.Graphics.FillRectangle(backColorBrush, border);
+                            e.Graphics.DrawRectangle(gridLinePen, border);
                         }
-                        //e.Graphics.DrawLine(gridLinePen, e.CellBounds.Left, e.CellBounds.Bottom - 1, e.CellBounds.Right, e.CellBounds.Bottom - 1);
-                        //e.Graphics.DrawLine(gridLinePen, e.CellBounds.Right - 1, e.CellBounds.Top - 1, e.CellBounds.Right - 1, e.CellBounds.Bottom);
                     }
                 }
             }

@@ -5,6 +5,8 @@ VisualStudioVersion = 12.0.31101.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FootballSimulator", "FootballSimulator\FootballSimulator.csproj", "{60137B02-DFF0-4345-807C-669DBE476AAB}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WPFFootbalSimulator", "WPFFootbalSimulator\WPFFootbalSimulator.csproj", "{CE20DA4F-72EC-41AA-9759-2490040F00D2}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{60137B02-DFF0-4345-807C-669DBE476AAB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{60137B02-DFF0-4345-807C-669DBE476AAB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{60137B02-DFF0-4345-807C-669DBE476AAB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CE20DA4F-72EC-41AA-9759-2490040F00D2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CE20DA4F-72EC-41AA-9759-2490040F00D2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CE20DA4F-72EC-41AA-9759-2490040F00D2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CE20DA4F-72EC-41AA-9759-2490040F00D2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
